@@ -46,6 +46,41 @@ const variants = [
 export default function FlavorsSection() {
   const [selectedVariant, setSelectedVariant] = useState<typeof variants[0] | null>(null);
   const [showCheckout, setShowCheckout] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleCheckoutSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      contact: formData.get('contact'),
+      email: formData.get('email'),
+      location: formData.get('location'),
+      variantName: selectedVariant?.name,
+    };
+
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      
+      if (response.ok) {
+        alert("Order submitted! Check your email for a confirmation.");
+        setSelectedVariant(null);
+        setShowCheckout(false);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Error submitting order.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Prevent scrolling on the body when modal is open
   if (typeof window !== 'undefined') {
@@ -204,20 +239,21 @@ export default function FlavorsSection() {
                         className="flex flex-col space-y-6 w-full"
                       >
                         <h3 className="text-3xl font-medium mb-2 tracking-tight">Checkout</h3>
-                        <form className="flex flex-col gap-4" onSubmit={(e) => { e.preventDefault(); alert("Thanks for trying out the form."); setSelectedVariant(null); setShowCheckout(false); }}>
-                          <input type="text" placeholder="Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-neutral-600" required />
-                          <input type="tel" placeholder="Contact Number" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-neutral-600" required />
-                          <input type="email" placeholder="Email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-neutral-600" required />
-                          <input type="text" placeholder="Location" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-neutral-600" required />
+                        <form className="flex flex-col gap-4" onSubmit={handleCheckoutSubmit}>
+                          <input name="name" type="text" placeholder="Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-neutral-600" required />
+                          <input name="contact" type="tel" placeholder="Contact Number" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-neutral-600" required />
+                          <input name="email" type="email" placeholder="Email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-neutral-600" required />
+                          <input name="location" type="text" placeholder="Location" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 transition-colors placeholder:text-neutral-600" required />
                           
                           <textarea 
-                            placeholder="don't waste your time We can't get your information We just made this form to fool you" 
+                            name="message"
+                            placeholder="don't waste your time We can't get your information We just made this form to fool you... but now we actually send emails!" 
                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm h-24 resize-none focus:outline-none focus:border-white/30 transition-colors placeholder:text-neutral-500 italic" 
                           />
                           
                           <div className="pt-2">
-                            <button type="submit" className="w-full py-4 bg-white text-black font-medium text-sm tracking-widest uppercase rounded-xl hover:bg-neutral-200 transition-colors">
-                              Submit Order
+                            <button type="submit" disabled={isSubmitting} className="w-full py-4 bg-white text-black font-medium text-sm tracking-widest uppercase rounded-xl hover:bg-neutral-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                              {isSubmitting ? 'Sending Order...' : 'Submit Order'}
                             </button>
                           </div>
                         </form>
