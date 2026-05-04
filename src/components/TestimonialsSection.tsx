@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const testimonials = [
   {
-    text: "Ei bainchod amar tk mere dise.",
+    text: "Ei bainsud amar tk mere dise.",
     image: "/testimonials/ehsanul-haque-milon-170226-1771310715.jpg",
     name: "Kailla Milon",
     role: "Biddya Chor",
@@ -23,7 +23,7 @@ const testimonials = [
     role: "MIT Scientist",
   },
   {
-    text: "amar ganja khawar tk loiya gesega",
+    text: "amar pot kora tk loiya gesega",
     image: "/testimonials/bongoboltu.jpg",
     name: "Bongoboltu",
     role: "CEO of BANGLADESH",
