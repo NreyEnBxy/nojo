@@ -24,8 +24,8 @@ export default function TermsAndConditions() {
       <div className="px-4 py-12">
         <BlurFade delay={0.25} inView yOffset={60} duration={1.2}>
           <h1 
-            className="text-4xl md:text-6xl lg:text-8xl font-bold text-center max-w-5xl px-6 leading-[0.9]"
-            style={{ fontFamily: 'Helvetica, Arial, sans-serif', letterSpacing: '-6px' }}
+            className="text-4xl md:text-6xl lg:text-8xl font-bold text-center max-w-5xl px-6 leading-[0.9] tracking-[-2px] md:tracking-[-6px]"
+            style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
             There are no <br className="hidden md:block"/> terms and conditions <br className="hidden md:block"/> in our country.
           </h1>
