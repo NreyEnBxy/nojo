@@ -73,10 +73,11 @@ export default function FlavorsSection() {
         setSelectedVariant(null);
         setShowCheckout(false);
       } else {
-        alert("Something went wrong. Please try again.");
+        const errorData = await response.json();
+        alert("Error: " + (errorData.details || errorData.error || "Something went wrong. Please try again."));
       }
     } catch (error) {
-      alert("Error submitting order.");
+      alert("Error submitting order. " + (error as Error).message);
     } finally {
       setIsSubmitting(false);
     }
