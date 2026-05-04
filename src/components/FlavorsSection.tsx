@@ -39,7 +39,7 @@ const variants = [
     bgColor: '#1f0d14',
     image: 'Pink Chumt.png',
     price: 750,
-    details: 'It's 99.9% pure footbath of Elite Russian baddies and add 0.3 grams of their pee.A true marvel of modern nutrition, this impossibly rare elixir boasts an astonishing 75 grams of pure protein per 100 grams.It is the pinnacle of esoteric refreshment—for those who demand the absolute peak of unapologetic luxury.'
+    details: `It's 99.9% pure footbath of Elite Russian baddies and add 0.3 grams of pee.A true marvel of modern nutrition, this impossibly rare elixir boasts an astonishing 75 grams of pure protein per 100 grams.It is the pinnacle of esoteric refreshment—for those who demand the absolute peak of unapologetic luxury.`
   }
 ];
 
