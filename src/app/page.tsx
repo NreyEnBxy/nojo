@@ -5,7 +5,7 @@ import FlavorsSection from '@/components/FlavorsSection';
 import ProductSection from '@/components/ProductSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import { Typewriter } from '@/components/ui/typewriter';
-
+import { ImageComparison } from '@/components/ui/image-comparison-slider';
 export default function Home() {
   return (
     <SmoothScroll>
@@ -91,6 +91,20 @@ export default function Home() {
               cursorChar={"_"}
             />
           </div>
+        </section>
+
+        {/* 4.6 Image Comparison Section */}
+        <section className="w-full min-h-screen bg-black py-32 px-6 relative z-20 flex flex-col items-center justify-center border-t border-white/5">
+          <div className="max-w-4xl mx-auto w-full text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.3em] text-neutral-500 mb-4">The Difference</p>
+            <h2 className="text-4xl md:text-6xl font-light text-white tracking-tight">Before & After NOJO</h2>
+          </div>
+          <ImageComparison
+            beforeImage="/images/before-after/before.png"
+            afterImage="/images/before-after/after.png"
+            altBefore="Before NOJO"
+            altAfter="After NOJO"
+          />
         </section>
 
         {/* 4.7 Testimonials Section */}
