@@ -234,14 +234,15 @@ export function CinematicFooter() {
 
     // React strict mode compatible GSAP context cleanup
     const ctx = gsap.context(() => {
-      // Background Parallax
+      // Background Parallax with Blur
       gsap.fromTo(
         giantTextRef.current,
-        { y: "10vh", scale: 0.8, opacity: 0 },
+        { y: "10vh", scale: 0.8, opacity: 0, filter: "blur(20px)" },
         {
           y: "0vh",
           scale: 1,
           opacity: 1,
+          filter: "blur(0px)",
           immediateRender: false,
           ease: "power1.out",
           scrollTrigger: {
@@ -253,13 +254,14 @@ export function CinematicFooter() {
         }
       );
 
-      // Staggered Content Reveal
+      // Staggered Content Reveal with Blur
       gsap.fromTo(
         [headingRef.current, linksRef.current],
-        { y: 50, opacity: 0 },
+        { y: 100, opacity: 0, filter: "blur(15px)" },
         {
           y: 0,
           opacity: 1,
+          filter: "blur(0px)",
           stagger: 0.15,
           immediateRender: false,
           ease: "power3.out",
@@ -271,7 +273,7 @@ export function CinematicFooter() {
           },
         }
       );
-      
+
       // Refresh ScrollTrigger after a short delay to ensure layout is ready
       setTimeout(() => {
         ScrollTrigger.refresh();
@@ -318,7 +320,7 @@ export function CinematicFooter() {
             ref={giantTextRef}
             className="footer-giant-bg-text absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
           >
-            SOBERS
+            NOJO
           </div>
 
           {/* 1. Diagonal Sleek Marquee (Top of footer) */}
@@ -335,7 +337,7 @@ export function CinematicFooter() {
               ref={headingRef}
               className="text-5xl md:text-8xl font-black footer-text-glow tracking-tighter mb-12 text-center"
             >
-              Ready to begin?
+              Ready to drink?
             </h2>
 
             {/* Interactive Magnetic Pills Layout */}
@@ -377,7 +379,7 @@ export function CinematicFooter() {
 
             {/* Copyright */}
             <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 md:order-1">
-              © 2026 Volvox. All rights reserved.
+              © 2026 NOJO INT . All rights reserved.
             </div>
 
             {/* "Made with Love" Badge */}
@@ -385,7 +387,7 @@ export function CinematicFooter() {
               <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest">Crafted with</span>
               <span className="animate-footer-heartbeat text-sm md:text-base text-destructive">❤</span>
               <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest">by</span>
-              <span className="text-foreground font-black text-xs md:text-sm tracking-normal ml-1">Volvox</span>
+              <span className="text-foreground font-black text-xs md:text-sm tracking-normal ml-1">NUET</span>
             </div>
 
             {/* Back to top */}
