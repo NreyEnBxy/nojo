@@ -17,9 +17,9 @@ interface GlobeInteractiveProps {
 }
 
 const defaultMarkers: InteractiveMarker[] = [
-  { id: "hq", location: [37.78, -122.44], name: "HQ", users: 1420 },
+  { id: "hq", location: [37.78, -122.44], name: "AMERICA", users: 1420 },
   { id: "eu", location: [52.52, 13.41], name: "EU", users: 892 },
-  { id: "asia", location: [35.68, 139.65], name: "Asia", users: 2103 },
+  { id: "asia", location: [22.83, 89.53], name: "NIGATOLA", users: 2103 },
   { id: "latam", location: [-23.55, -46.63], name: "LATAM", users: 567 },
   { id: "mena", location: [25.2, 55.27], name: "MENA", users: 734 },
   { id: "oceania", location: [-33.87, 151.21], name: "APAC", users: 445 },
