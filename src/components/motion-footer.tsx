@@ -217,11 +217,11 @@ MagneticButton.displayName = "MagneticButton";
 // -------------------------------------------------------------------------
 const MarqueeItem = () => (
   <div className="flex items-center space-x-12 px-6">
-    <span>Accountability Redefined</span> <span className="text-primary/60">✦</span>
-    <span>Transparent Tracking</span> <span className="text-secondary/60">✦</span>
-    <span>12-Step Progress</span> <span className="text-primary/60">✦</span>
-    <span>Sponsor Connection</span> <span className="text-secondary/60">✦</span>
-    <span>Absolute Privacy</span> <span className="text-primary/60">✦</span>
+    <span>PREMIUM COLA</span> <span className="text-primary/60">✦</span>
+    <span>PURE ESSENCE</span> <span className="text-secondary/60">✦</span>
+    <span>LIMITED EDITION</span> <span className="text-primary/60">✦</span>
+    <span>EXPERIENCE COLD</span> <span className="text-secondary/60">✦</span>
+    <span>BORN IN NIGATOLA</span> <span className="text-primary/60">✦</span>
   </div>
 );
 
@@ -232,8 +232,50 @@ export function CinematicFooter() {
   const linksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // No scroll-triggered entrance animations as requested.
-    // Elements are now visible by default.
+    if (typeof window === "undefined") return;
+    if (!wrapperRef.current) return;
+
+    // React strict mode compatible GSAP context cleanup
+    const ctx = gsap.context(() => {
+      // Giant background text parallax
+      gsap.fromTo(giantTextRef.current,
+        { y: "15%" },
+        {
+          y: "-15%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          }
+        }
+      );
+
+      // Staggered Content Reveal following scroll
+      gsap.fromTo([headingRef.current, linksRef.current],
+        { 
+          y: 80, 
+          opacity: 0, 
+          filter: "blur(12px)" 
+        },
+        {
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top 90%",
+            end: "bottom 95%",
+            scrub: 1,
+          }
+        }
+      );
+    }, wrapperRef);
+
+    return () => ctx.revert();
   }, []);
 
   const scrollToTop = () => {
@@ -264,7 +306,7 @@ export function CinematicFooter() {
           {/* Giant background text */}
           <div
             ref={giantTextRef}
-            className="footer-giant-bg-text absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
+            className="footer-giant-bg-text absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-[-1] pointer-events-none select-none opacity-50"
           >
             NOJO
           </div>
@@ -325,15 +367,13 @@ export function CinematicFooter() {
             
             {/* Copyright */}
             <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 md:order-1">
-              © 2026 Volvox. All rights reserved.
+              © 2026 NOJO INT. All rights reserved.
             </div>
 
             {/* "Made with Love" Badge */}
             <div className="footer-glass-pill px-6 py-3 rounded-full flex items-center gap-2 order-1 md:order-2 cursor-default border-border/50">
-              <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest">Crafted with</span>
-              <span className="animate-footer-heartbeat text-sm md:text-base text-destructive">❤</span>
-              <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest">by</span>
-              <span className="text-foreground font-black text-xs md:text-sm tracking-normal ml-1">Volvox</span>
+              <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest">Crafted by</span>
+              <span className="text-foreground font-black text-xs md:text-sm tracking-normal ml-1">NUET</span>
             </div>
 
             {/* Back to top */}
