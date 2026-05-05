@@ -11,7 +11,7 @@ import { ImageComparison } from '@/components/ui/image-comparison-slider';
 export default function Home() {
   return (
     <SmoothScroll>
-      <main className="relative z-10 min-h-screen bg-black text-white selection:bg-neutral-800 border-b border-white/5">
+      <main className="min-h-screen bg-black text-white selection:bg-neutral-800">
         {/* Navigation */}
         <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 mix-blend-difference">
           <a href="/" className="text-xl font-bold tracking-widest uppercase hover:opacity-80 transition-opacity">NOJO</a>
@@ -146,9 +146,10 @@ export default function Home() {
             </a>
           </div>
         </section>
-      </main>
 
-      <CinematicFooter />
+        {/* 6. Footer */}
+        <CinematicFooter />
+      </main>
     </SmoothScroll>
   );
 }
