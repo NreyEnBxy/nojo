@@ -232,66 +232,8 @@ export function CinematicFooter() {
   const linksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!wrapperRef.current) return;
-
-    // React strict mode compatible GSAP context cleanup
-    const ctx = gsap.context(() => {
-      // 1. Initial State: Set elements to hidden/blurred/down
-      const animateTargets = [
-        giantTextRef.current,
-        headingRef.current,
-        linksRef.current
-      ];
-
-      gsap.set(animateTargets, {
-        y: 80,
-        opacity: 0,
-        filter: "blur(15px)",
-        visibility: "visible"
-      });
-
-      // 2. The Animation Timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top 85%", // Fire slightly before it's fully visible
-          once: true,       // Only animate in once
-          onEnter: () => ScrollTrigger.refresh() // Ensure positions are correct
-        }
-      });
-
-      tl.to(giantTextRef.current, {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 1.5,
-        ease: "power4.out"
-      })
-      .to(headingRef.current, {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 1.2,
-        ease: "power4.out"
-      }, "-=1.0")
-      .to(linksRef.current, {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 1.0,
-        stagger: 0.1,
-        ease: "power4.out"
-      }, "-=0.8");
-
-      // Initial refresh to catch the state if already at bottom
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 100);
-      
-    }, wrapperRef);
-
-    return () => ctx.revert();
+    // No scroll-triggered entrance animations as requested.
+    // Elements are now visible by default.
   }, []);
 
   const scrollToTop = () => {
@@ -322,7 +264,7 @@ export function CinematicFooter() {
           {/* Giant background text */}
           <div
             ref={giantTextRef}
-            className="footer-giant-bg-text footer-reveal-hidden absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
+            className="footer-giant-bg-text absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
           >
             NOJO
           </div>
@@ -339,13 +281,13 @@ export function CinematicFooter() {
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 mt-20 w-full max-w-5xl mx-auto">
             <h2
               ref={headingRef}
-              className="text-5xl md:text-8xl font-black footer-text-glow tracking-tighter mb-12 text-center footer-reveal-hidden"
+              className="text-5xl md:text-8xl font-black footer-text-glow tracking-tighter mb-12 text-center"
             >
               Ready to begin?
             </h2>
 
             {/* Interactive Magnetic Pills Layout */}
-            <div ref={linksRef} className="flex flex-col items-center gap-6 w-full footer-reveal-hidden">
+            <div ref={linksRef} className="flex flex-col items-center gap-6 w-full">
               {/* App Store Links (Primary) */}
               <div className="flex flex-wrap justify-center gap-4 w-full">
                 <MagneticButton as="a" href="#" className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group">
