@@ -13,7 +13,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    const lenis = new Lenis({
+    lenisRef.current = new Lenis({
       duration: 1.5,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
@@ -23,19 +23,18 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       touchMultiplier: 2,
     });
 
-    lenisRef.current = lenis;
+    function raf(time: number) {
+      lenisRef.current?.raf(time);
+      ScrollTrigger.update();
+      requestAnimationFrame(raf);
+    }
 
-    // Sync ScrollTrigger with Lenis via Proxy
-    lenis.on('scroll', ScrollTrigger.update);
-
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
-    gsap.ticker.lagSmoothing(0);
-
-    // Initial refresh
-    ScrollTrigger.refresh();
+    requestAnimationFrame(raf);
+    
+    // Initial refresh to ensure ScrollTrigger knows about the full page height
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1000);
 
     return () => {
       lenisRef.current?.destroy();
