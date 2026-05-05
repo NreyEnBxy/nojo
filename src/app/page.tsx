@@ -3,6 +3,7 @@ import SmoothScroll from '@/components/SmoothScroll';
 import CanvasSequence from '@/components/CanvasSequence';
 import FlavorsSection from '@/components/FlavorsSection';
 import ProductSection from '@/components/ProductSection';
+import { GlobeInteractive } from '@/components/ui/cobe-globe-interactive';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import { Typewriter } from '@/components/ui/typewriter';
 import { ImageComparison } from '@/components/ui/image-comparison-slider';
@@ -109,6 +110,20 @@ export default function Home() {
 
         {/* 4.7 Testimonials Section */}
         <TestimonialsSection />
+
+        {/* 4.8 Our Physical Store Section */}
+        <section id="store" className="w-full min-h-screen bg-black py-32 px-6 relative z-20 flex flex-col items-center justify-center border-t border-white/5">
+          <div className="max-w-4xl mx-auto w-full text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.3em] text-neutral-500 mb-4">Visit Us</p>
+            <h2 className="text-4xl md:text-6xl font-light text-white tracking-tight mb-6">Our Physical Store</h2>
+            <p className="text-lg text-neutral-400 font-light max-w-2xl mx-auto">
+              Find the essence of cold in our flagship Nigatola locations. Interactive kiosks available for custom flavor profiles.
+            </p>
+          </div>
+          <div className="w-full max-w-2xl aspect-square relative">
+            <GlobeInteractive />
+          </div>
+        </section>
 
         {/* 5. CTA Section */}
         <section className="py-40 px-6 bg-neutral-950 border-t border-white/5 z-20 relative overflow-hidden">
