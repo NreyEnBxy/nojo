@@ -242,6 +242,7 @@ export function CinematicFooter() {
           y: "0vh",
           scale: 1,
           opacity: 1,
+          immediateRender: false,
           ease: "power1.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
@@ -260,6 +261,7 @@ export function CinematicFooter() {
           y: 0,
           opacity: 1,
           stagger: 0.15,
+          immediateRender: false,
           ease: "power3.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
@@ -269,9 +271,21 @@ export function CinematicFooter() {
           },
         }
       );
+      
+      // Refresh ScrollTrigger after a short delay to ensure layout is ready
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 500);
+
     }, wrapperRef);
 
-    return () => ctx.revert();
+    const handleResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const scrollToTop = () => {

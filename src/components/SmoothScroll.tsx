@@ -30,6 +30,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     }
 
     requestAnimationFrame(raf);
+    
+    // Initial refresh to ensure ScrollTrigger knows about the full page height
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1000);
 
     return () => {
       lenisRef.current?.destroy();
