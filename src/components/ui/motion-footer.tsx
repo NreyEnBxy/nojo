@@ -237,56 +237,49 @@ export function CinematicFooter() {
     if (typeof window === "undefined") return;
     if (!wrapperRef.current) return;
 
-    const ctx = gsap.context(() => {
-      // All elements start hidden (set via CSS class .footer-reveal-item)
-      // One-shot entrance animation when the footer wrapper enters the viewport
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top 90%",   // fire as soon as footer peeks in
-          once: true,         // play only once — no scrub, no reversing
-        },
-      });
+    const runEntrance = () => {
+      const tl = gsap.timeline();
 
-      // Stagger each element in sequence: bg text → marquee → heading → links → bottom bar
       tl.to(giantTextRef.current, {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 1.0,
-        ease: "power3.out",
+        y: 0, opacity: 1, filter: "blur(0px)",
+        duration: 1.0, ease: "power3.out",
       })
       .to(marqueeRef.current, {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 0.7,
-        ease: "power3.out",
+        y: 0, opacity: 1, filter: "blur(0px)",
+        duration: 0.7, ease: "power3.out",
       }, "-=0.7")
       .to(headingRef.current, {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 0.9,
-        ease: "power3.out",
+        y: 0, opacity: 1, filter: "blur(0px)",
+        duration: 0.9, ease: "power3.out",
       }, "-=0.5")
       .to(linksRef.current, {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 0.8,
-        ease: "power3.out",
+        y: 0, opacity: 1, filter: "blur(0px)",
+        duration: 0.8, ease: "power3.out",
       }, "-=0.6")
       .to(bottomBarRef.current, {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 0.7,
-        ease: "power3.out",
+        y: 0, opacity: 1, filter: "blur(0px)",
+        duration: 0.7, ease: "power3.out",
       }, "-=0.5");
-    }, wrapperRef);
+    };
 
-    return () => ctx.revert();
+    // IntersectionObserver fires correctly even if the element is already
+    // visible on page load (e.g. when user reloads while scrolled to bottom).
+    // ScrollTrigger does NOT handle this case reliably.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runEntrance();
+            observer.disconnect(); // play only once
+          }
+        });
+      },
+      { threshold: 0.05 } // fires as soon as 5% of the footer is visible
+    );
+
+    observer.observe(wrapperRef.current);
+
+    return () => observer.disconnect();
   }, []);
 
   const scrollToTop = () => {
