@@ -227,41 +227,42 @@ export function CinematicFooter() {
     if (!wrapperRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Set initial state immediately
+      gsap.set(giantTextRef.current, { opacity: 0, scale: 0.8, y: 100, filter: "blur(30px)" });
+      gsap.set([headingRef.current, linksRef.current], { opacity: 0, y: 150, filter: "blur(20px)" });
+
       // Background Parallax
-      gsap.fromTo(giantTextRef.current, 
-        { opacity: 0, scale: 0.8, y: 50, filter: "blur(20px)" },
-        {
-          opacity: 0.2,
-          scale: 1,
-          y: 0,
-          filter: "blur(0px)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top bottom",
-            end: "bottom bottom",
-            scrub: 1,
-          }
+      gsap.to(giantTextRef.current, {
+        opacity: 0.2,
+        scale: 1,
+        y: 0,
+        filter: "blur(0px)",
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top bottom",
+          end: "bottom 80%",
+          scrub: 1.5,
         }
-      );
+      });
 
       // Main Content Slide-Blur
-      gsap.fromTo([headingRef.current, linksRef.current],
-        { opacity: 0, y: 100, filter: "blur(15px)" },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top bottom",
-            end: "bottom bottom",
-            scrub: 1,
-          }
+      gsap.to([headingRef.current, linksRef.current], {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top 95%",
+          end: "bottom 80%",
+          scrub: 1.5,
         }
-      );
+      });
+
+      // Refresh ScrollTrigger after a short delay
+      setTimeout(() => ScrollTrigger.refresh(), 1000);
     }, wrapperRef);
 
     return () => ctx.revert();
