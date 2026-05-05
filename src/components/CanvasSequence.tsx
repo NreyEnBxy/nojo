@@ -56,45 +56,46 @@ export default function CanvasSequence({ frameCount, folderPath, prefix }: Canva
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
 
-    // Create GSAP ScrollTrigger for the sequence
+    // Create GSAP ScrollTrigger for the sequence — scoped so cleanup
+    // only kills this component's triggers, not the footer's.
     const frameObj = { frame: 0 };
-    
-    const animation = gsap.to(frameObj, {
-      frame: frameCount - 1,
-      snap: 'frame',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.5,
-      },
-      onUpdate: () => {
-        const frameIndex = Math.round(frameObj.frame);
-        setCurrentFrame(frameIndex);
-        renderFrame(frameIndex);
-      }
-    });
-    
-    // Text animation
-    if (textRef.current) {
-      gsap.to(textRef.current, {
-        opacity: 0,
-        y: -50,
-        ease: 'power2.inOut',
+    const ctx = gsap.context(() => {
+      gsap.to(frameObj, {
+        frame: frameCount - 1,
+        snap: 'frame',
+        ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: '15% top',
-          scrub: 1,
+          end: 'bottom bottom',
+          scrub: 0.5,
+        },
+        onUpdate: () => {
+          const frameIndex = Math.round(frameObj.frame);
+          setCurrentFrame(frameIndex);
+          renderFrame(frameIndex);
         }
       });
-    }
+
+      // Text animation
+      if (textRef.current) {
+        gsap.to(textRef.current, {
+          opacity: 0,
+          y: -50,
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top top',
+            end: '15% top',
+            scrub: 1,
+          }
+        });
+      }
+    }, containerRef);
 
     return () => {
       window.removeEventListener('resize', updateDimensions);
-      animation.kill();
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      ctx.revert(); // Only kills triggers created inside this context
     };
   }, [isLoaded, images, frameCount, currentFrame]);
 
