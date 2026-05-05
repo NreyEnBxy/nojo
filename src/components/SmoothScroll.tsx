@@ -25,7 +25,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     lenisRef.current = lenis;
 
-    // Sync ScrollTrigger with Lenis
+    // Sync ScrollTrigger with Lenis via Proxy
     lenis.on('scroll', ScrollTrigger.update);
 
     gsap.ticker.add((time) => {
@@ -33,11 +33,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     });
 
     gsap.ticker.lagSmoothing(0);
-    
-    // Initial refresh to ensure ScrollTrigger knows about the full page height
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 1000);
+
+    // Initial refresh
+    ScrollTrigger.refresh();
 
     return () => {
       lenisRef.current?.destroy();

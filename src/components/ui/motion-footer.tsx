@@ -234,38 +234,45 @@ export function CinematicFooter() {
 
     // React strict mode compatible GSAP context cleanup
     const ctx = gsap.context(() => {
+      // Set initial states to ensure they are ready for animation
+      gsap.set([giantTextRef.current, headingRef.current, linksRef.current], {
+        opacity: 0,
+        y: 100,
+        filter: "blur(20px)"
+      });
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapperRef.current,
-          start: "top bottom",
+          start: "top 95%",
           end: "bottom bottom",
           scrub: 1,
           invalidateOnRefresh: true,
         }
       });
 
-      // Background Parallax with Blur
-      tl.from(giantTextRef.current, {
-        y: "15vh",
-        scale: 0.8,
-        opacity: 0,
-        filter: "blur(20px)",
+      // Background Parallax
+      tl.to(giantTextRef.current, {
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        filter: "blur(0px)",
         ease: "none"
       }, 0);
 
-      // Staggered Content Reveal with Blur
-      tl.from([headingRef.current, linksRef.current], {
-        y: 100,
-        opacity: 0,
-        filter: "blur(15px)",
+      // Staggered Content Reveal
+      tl.to([headingRef.current, linksRef.current], {
+        y: 0,
+        opacity: 1,
+        filter: "blur(0px)",
         stagger: 0.1,
         ease: "power2.out"
       }, 0);
       
-      // Refresh ScrollTrigger after a delay to ensure layout is ready
+      // Refresh ScrollTrigger after a delay
       setTimeout(() => {
         ScrollTrigger.refresh();
-      }, 1000);
+      }, 2000);
 
     }, wrapperRef);
 
