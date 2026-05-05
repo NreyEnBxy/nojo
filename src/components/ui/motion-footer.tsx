@@ -235,47 +235,43 @@ export function CinematicFooter() {
     // React strict mode compatible GSAP context cleanup
     const ctx = gsap.context(() => {
       // Background Parallax with Blur
-      gsap.fromTo(
+      gsap.from(
         giantTextRef.current,
-        { y: "20vh", scale: 0.7, opacity: 0, filter: "blur(30px)" },
-        {
-          y: "0vh",
-          scale: 1,
-          opacity: 1,
-          filter: "blur(0px)",
-          ease: "none",
+        { 
+          y: "15vh", 
+          scale: 0.8, 
+          opacity: 0, 
+          filter: "blur(20px)",
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "top bottom",
             end: "bottom bottom",
-            scrub: true,
+            scrub: 1,
           },
         }
       );
 
       // Staggered Content Reveal with Blur
-      gsap.fromTo(
+      gsap.from(
         [headingRef.current, linksRef.current],
-        { y: 150, opacity: 0, filter: "blur(20px)" },
-        {
-          y: 0,
-          opacity: 1,
-          filter: "blur(0px)",
+        { 
+          y: 80, 
+          opacity: 0, 
+          filter: "blur(10px)",
           stagger: 0.1,
-          ease: "power2.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "top bottom",
             end: "bottom bottom",
-            scrub: true,
+            scrub: 1,
           },
         }
       );
-
-      // Refresh ScrollTrigger after a short delay to ensure layout is ready
+      
+      // Refresh ScrollTrigger after a delay to ensure layout is ready
       setTimeout(() => {
         ScrollTrigger.refresh();
-      }, 800);
+      }, 1500);
 
     }, wrapperRef);
 
@@ -303,7 +299,7 @@ export function CinematicFooter() {
       */}
       <div
         ref={wrapperRef}
-        className="relative h-screen w-full overflow-hidden"
+        className="relative h-screen w-full"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
         {/* The actual footer stays fixed to the viewport underneath everything */}
