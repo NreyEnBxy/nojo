@@ -1,4 +1,3 @@
-// --- Component ---
 "use client";
 
 import * as React from "react";
@@ -133,7 +132,7 @@ const STYLES = `
 // -------------------------------------------------------------------------
 // 2. MAGNETIC BUTTON PRIMITIVE (Zero Dependency)
 // -------------------------------------------------------------------------
-export type MagneticButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+export type MagneticButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & 
   React.AnchorHTMLAttributes<HTMLAnchorElement> & {
     as?: React.ElementType;
   };
@@ -193,11 +192,9 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
     return (
       <Component
         ref={(node: HTMLElement) => {
-          if (node) {
-            (localRef as any).current = node;
-            if (typeof forwardedRef === "function") forwardedRef(node);
-            else if (forwardedRef) (forwardedRef as any).current = node;
-          }
+          (localRef as any).current = node;
+          if (typeof forwardedRef === "function") forwardedRef(node);
+          else if (forwardedRef) (forwardedRef as any).current = node;
         }}
         className={cn("cursor-pointer", className)}
         {...props}
@@ -214,11 +211,11 @@ MagneticButton.displayName = "MagneticButton";
 // -------------------------------------------------------------------------
 const MarqueeItem = () => (
   <div className="flex items-center space-x-12 px-6">
-    <span>Accountability Redefined</span> <span className="text-primary/60">✦</span>
-    <span>Transparent Tracking</span> <span className="text-secondary/60">✦</span>
-    <span>12-Step Progress</span> <span className="text-primary/60">✦</span>
-    <span>Sponsor Connection</span> <span className="text-secondary/60">✦</span>
-    <span>Absolute Privacy</span> <span className="text-primary/60">✦</span>
+    <span>Pure. Crisp. Cold.</span> <span className="text-primary/60">✦</span>
+    <span>Born in Nigatola</span> <span className="text-secondary/60">✦</span>
+    <span>Premium Cold Cola</span> <span className="text-primary/60">✦</span>
+    <span>NOJO Experience</span> <span className="text-secondary/60">✦</span>
+    <span>Absolute Refreshment</span> <span className="text-primary/60">✦</span>
   </div>
 );
 
@@ -234,62 +231,44 @@ export function CinematicFooter() {
 
     // React strict mode compatible GSAP context cleanup
     const ctx = gsap.context(() => {
-      // Set initial state
-      gsap.set(giantTextRef.current, { y: "20vh", scale: 0.7, opacity: 0, filter: "blur(30px)" });
-      gsap.set([headingRef.current, linksRef.current], { y: 150, opacity: 0, filter: "blur(20px)" });
-
-      // Background Parallax with Blur
-      gsap.to(
+      // Background Parallax
+      gsap.fromTo(
         giantTextRef.current,
+        { y: "10vh", scale: 0.8, opacity: 0 },
         {
           y: "0vh",
           scale: 1,
           opacity: 1,
-          filter: "blur(0px)",
-          ease: "none",
+          ease: "power1.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "top bottom",
+            start: "top 80%",
             end: "bottom bottom",
-            scrub: true,
-            invalidateOnRefresh: true,
+            scrub: 1,
           },
         }
       );
 
-      // Staggered Content Reveal with Blur
-      gsap.to(
+      // Staggered Content Reveal
+      gsap.fromTo(
         [headingRef.current, linksRef.current],
+        { y: 50, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          filter: "blur(0px)",
-          stagger: 0.1,
-          ease: "power2.out",
+          stagger: 0.15,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "top bottom",
+            start: "top 40%",
             end: "bottom bottom",
-            scrub: true,
-            invalidateOnRefresh: true,
+            scrub: 1,
           },
         }
       );
-
-      // Refresh ScrollTrigger after a short delay
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 1000);
-
     }, wrapperRef);
 
-    const handleResize = () => ScrollTrigger.refresh();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      ctx.revert();
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => ctx.revert();
   }, []);
 
   const scrollToTop = () => {
@@ -299,7 +278,7 @@ export function CinematicFooter() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
-
+      
       {/* 
         The "Curtain Reveal" Wrapper:
         It sits in standard flow. Because it has clip-path, its contents
@@ -307,12 +286,12 @@ export function CinematicFooter() {
       */}
       <div
         ref={wrapperRef}
-        className="relative h-screen w-full overflow-hidden"
-        style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)", zIndex: 50 }}
+        className="relative h-screen w-full"
+        style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
         {/* The actual footer stays fixed to the viewport underneath everything */}
-        <footer className="fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper" style={{ zIndex: 0 }}>
-
+        <footer className="fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper">
+          
           {/* Ambient Light & Grid Background */}
           <div className="footer-aurora absolute left-1/2 top-1/2 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] pointer-events-none z-0" />
           <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
@@ -344,33 +323,33 @@ export function CinematicFooter() {
 
             {/* Interactive Magnetic Pills Layout */}
             <div ref={linksRef} className="flex flex-col items-center gap-6 w-full">
-              {/* App Store Links (Primary) */}
+              {/* Primary Links */}
               <div className="flex flex-wrap justify-center gap-4 w-full">
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group">
-                  <svg className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.56.04 2.87.67 3.55 1.76-3.13 1.77-2.62 5.92.35 7.14-.65 1.58-1.57 3.1-2.57 4.03zm-3.21-14.7c-.55 1.4-1.89 2.37-3.25 2.28.09-1.5 1.05-2.82 2.38-3.4 1.25-.57 2.66-.41 3.25.04-.15.35-.26.72-.38 1.08z" />
+                <MagneticButton as="a" href="#variants" className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group">
+                  <svg className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
-                  Download iOS
+                  Shop Now
                 </MagneticButton>
-
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group">
-                  <svg className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0004.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0004.5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0222 3.503C15.5902 8.242 13.8533 7.85 12 7.85c-1.8533 0-3.5902.392-5.1369 1.1004L4.841 5.4475a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3436-4.1021-2.6893-7.5743-6.1185-9.4396" />
+                
+                <MagneticButton as="a" href="#story" className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group">
+                  <svg className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
-                  Download Android
+                  Our Story
                 </MagneticButton>
               </div>
 
               {/* Secondary Text Links */}
               <div className="flex flex-wrap justify-center gap-3 md:gap-6 w-full mt-2">
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
-                  Privacy Policy
+                <MagneticButton as="a" href="https://www.facebook.com/nigatolauniversityofengineeringandtechnologyNUET" target="_blank" rel="noopener noreferrer" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
+                  Facebook
                 </MagneticButton>
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
-                  Terms of Service
+                <MagneticButton as="a" href="/terms" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
+                  Terms & Conditions
                 </MagneticButton>
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
-                  Support
+                <MagneticButton as="a" href="#store" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
+                  Find a Store
                 </MagneticButton>
               </div>
             </div>
@@ -378,10 +357,10 @@ export function CinematicFooter() {
 
           {/* 3. Bottom Bar / Credits */}
           <div className="relative z-20 w-full pb-8 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
-
+            
             {/* Copyright */}
             <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 md:order-1">
-              © 2026 NOJO INT . All rights reserved.
+              © {new Date().getFullYear()} NOJO INT. All rights reserved.
             </div>
 
             {/* "Made with Love" Badge */}
