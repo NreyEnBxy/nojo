@@ -127,12 +127,8 @@ const STYLES = `
   filter: drop-shadow(0px 0px 20px color-mix(in oklch, var(--foreground) 15%, transparent));
 }
 
-/* Slide-up blur entrance — hidden initial state */
-.footer-reveal-item {
-  opacity: 0;
-  transform: translateY(60px);
-  filter: blur(12px);
-}
+/* Slide-up blur entrance — hidden initial state is set via gsap.set() in JS,
+   NOT via CSS, to avoid SSR flash and reload visibility bugs. */
 `;
 
 // -------------------------------------------------------------------------
@@ -237,9 +233,19 @@ export function CinematicFooter() {
     if (typeof window === "undefined") return;
     if (!wrapperRef.current) return;
 
+    const targets = [
+      giantTextRef.current,
+      marqueeRef.current,
+      headingRef.current,
+      linksRef.current,
+      bottomBarRef.current,
+    ].filter(Boolean);
+
+    // Set initial hidden state via JS (not CSS) to prevent SSR flash
+    gsap.set(targets, { y: 60, opacity: 0, filter: "blur(12px)" });
+
     const runEntrance = () => {
       const tl = gsap.timeline();
-
       tl.to(giantTextRef.current, {
         y: 0, opacity: 1, filter: "blur(0px)",
         duration: 1.0, ease: "power3.out",
@@ -262,23 +268,25 @@ export function CinematicFooter() {
       }, "-=0.5");
     };
 
-    // IntersectionObserver fires correctly even if the element is already
-    // visible on page load (e.g. when user reloads while scrolled to bottom).
-    // ScrollTrigger does NOT handle this case reliably.
+    // If the footer wrapper is already in the viewport (e.g. page reloaded
+    // while scrolled to bottom), run the animation immediately.
+    const rect = wrapperRef.current.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      runEntrance();
+      return;
+    }
+
+    // Otherwise wait until the user scrolls to the footer.
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            runEntrance();
-            observer.disconnect(); // play only once
-          }
-        });
+        if (entries[0].isIntersecting) {
+          runEntrance();
+          observer.disconnect();
+        }
       },
-      { threshold: 0.05 } // fires as soon as 5% of the footer is visible
+      { threshold: 0.05 }
     );
-
     observer.observe(wrapperRef.current);
-
     return () => observer.disconnect();
   }, []);
 
