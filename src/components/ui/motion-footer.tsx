@@ -237,19 +237,18 @@ export function CinematicFooter() {
       // Background Parallax with Blur
       gsap.fromTo(
         giantTextRef.current,
-        { y: "10vh", scale: 0.8, opacity: 0, filter: "blur(20px)" },
+        { y: "20vh", scale: 0.7, opacity: 0, filter: "blur(30px)" },
         {
           y: "0vh",
           scale: 1,
           opacity: 1,
           filter: "blur(0px)",
-          immediateRender: false,
-          ease: "power1.out",
+          ease: "none",
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "top bottom",
             end: "bottom bottom",
-            scrub: 1,
+            scrub: true,
           },
         }
       );
@@ -257,19 +256,18 @@ export function CinematicFooter() {
       // Staggered Content Reveal with Blur
       gsap.fromTo(
         [headingRef.current, linksRef.current],
-        { y: 100, opacity: 0, filter: "blur(15px)" },
+        { y: 150, opacity: 0, filter: "blur(20px)" },
         {
           y: 0,
           opacity: 1,
           filter: "blur(0px)",
-          stagger: 0.15,
-          immediateRender: false,
-          ease: "power3.out",
+          stagger: 0.1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "top bottom",
             end: "bottom bottom",
-            scrub: 1,
+            scrub: true,
           },
         }
       );
@@ -277,7 +275,7 @@ export function CinematicFooter() {
       // Refresh ScrollTrigger after a short delay to ensure layout is ready
       setTimeout(() => {
         ScrollTrigger.refresh();
-      }, 500);
+      }, 800);
 
     }, wrapperRef);
 
@@ -305,11 +303,11 @@ export function CinematicFooter() {
       */}
       <div
         ref={wrapperRef}
-        className="relative h-screen w-full"
+        className="relative h-screen w-full overflow-hidden"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
         {/* The actual footer stays fixed to the viewport underneath everything */}
-        <footer className="fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper">
+        <footer className="fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper" style={{ zIndex: 0 }}>
 
           {/* Ambient Light & Grid Background */}
           <div className="footer-aurora absolute left-1/2 top-1/2 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] pointer-events-none z-0" />
