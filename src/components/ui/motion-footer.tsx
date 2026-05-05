@@ -227,41 +227,41 @@ export function CinematicFooter() {
     if (!wrapperRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Set initial states
-      gsap.set([headingRef.current, linksRef.current], { 
-        opacity: 0, 
-        y: 60,
-        filter: "blur(10px)"
-      });
-      gsap.set(giantTextRef.current, {
-        opacity: 0,
-        scale: 0.9,
-        y: 40
-      });
+      // Background Parallax
+      gsap.fromTo(giantTextRef.current, 
+        { opacity: 0, scale: 0.8, y: 50, filter: "blur(20px)" },
+        {
+          opacity: 0.2,
+          scale: 1,
+          y: 0,
+          filter: "blur(0px)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 1,
+          }
+        }
+      );
 
-      // Animate on scroll
-      ScrollTrigger.create({
-        trigger: wrapperRef.current,
-        start: "top 80%",
-        onEnter: () => {
-          gsap.to([headingRef.current, linksRef.current], {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out"
-          });
-          gsap.to(giantTextRef.current, {
-            opacity: 0.2,
-            scale: 1,
-            y: 0,
-            duration: 1.5,
-            ease: "power2.out"
-          });
-        },
-        once: true // Only animate once for guaranteed visibility
-      });
+      // Main Content Slide-Blur
+      gsap.fromTo([headingRef.current, linksRef.current],
+        { opacity: 0, y: 100, filter: "blur(15px)" },
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 1,
+          }
+        }
+      );
     }, wrapperRef);
 
     return () => ctx.revert();
