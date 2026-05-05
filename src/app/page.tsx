@@ -4,13 +4,14 @@ import CanvasSequence from '@/components/CanvasSequence';
 import FlavorsSection from '@/components/FlavorsSection';
 import ProductSection from '@/components/ProductSection';
 import { GlobeInteractive } from '@/components/ui/cobe-globe-interactive';
+import { CinematicFooter } from '@/components/ui/motion-footer';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import { Typewriter } from '@/components/ui/typewriter';
 import { ImageComparison } from '@/components/ui/image-comparison-slider';
 export default function Home() {
   return (
     <SmoothScroll>
-      <main className="min-h-screen bg-black text-white selection:bg-neutral-800">
+      <main className="relative z-10 min-h-screen bg-black text-white selection:bg-neutral-800 border-b border-white/5">
         {/* Navigation */}
         <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 mix-blend-difference">
           <a href="/" className="text-xl font-bold tracking-widest uppercase hover:opacity-80 transition-opacity">NOJO</a>
@@ -145,38 +146,9 @@ export default function Home() {
             </a>
           </div>
         </section>
-
-        {/* 6. Footer */}
-        <footer className="bg-black py-16 px-8 lg:px-20 border-t border-white/10 z-20 relative">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
-            <div>
-              <a href="/" className="inline-block text-3xl font-bold tracking-widest uppercase mb-4 hover:opacity-80 transition-opacity">NOJO</a>
-              <p className="text-neutral-500 text-sm font-light">The definitive cold cola experience.</p>
-              <p className="text-neutral-500 text-sm font-light mt-1">A productional product of NUET.</p>
-            </div>
-
-            <div className="flex gap-8 text-sm tracking-widest uppercase font-light text-neutral-400">
-              <a
-                href="https://www.facebook.com/nigatolauniversityofengineeringandtechnologyNUET"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
-              >
-                Facebook
-              </a>
-              <a
-                href="/terms"
-                className="hover:text-white transition-colors"
-              >
-                Terms & Cond
-              </a>
-            </div>
-          </div>
-          <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5 text-xs text-neutral-600 tracking-wider">
-            &copy; {new Date().getFullYear()} NOJO INTL. ALL RIGHTS RESERVED.
-          </div>
-        </footer>
       </main>
+
+      <CinematicFooter />
     </SmoothScroll>
   );
 }
