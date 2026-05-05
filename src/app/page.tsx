@@ -4,7 +4,7 @@ import CanvasSequence from '@/components/CanvasSequence';
 import FlavorsSection from '@/components/FlavorsSection';
 import ProductSection from '@/components/ProductSection';
 import { GlobeInteractive } from '@/components/ui/cobe-globe-interactive';
-import { CinematicFooter } from '@/components/ui/motion-footer';
+import { CinematicFooter } from '@/components/motion-footer';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import { Typewriter } from '@/components/ui/typewriter';
 import { ImageComparison } from '@/components/ui/image-comparison-slider';
