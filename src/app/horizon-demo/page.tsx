@@ -1,5 +1,5 @@
 import { HorizonHeroSection } from "@/components/ui/horizon-hero-section";
-import { CinematicFooter } from "@/components/motion-footer";
+import { CinematicFooter } from "@/components/ui/motion-footer";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export default function HorizonDemo() {

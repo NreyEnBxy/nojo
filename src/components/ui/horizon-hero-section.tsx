@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CinematicFooter } from "@/components/motion-footer";
+import { CinematicFooter } from "@/components/ui/motion-footer";
 // @ts-ignore
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 // @ts-ignore
