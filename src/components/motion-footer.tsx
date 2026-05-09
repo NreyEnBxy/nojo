@@ -256,7 +256,7 @@ export function CinematicFooter() {
       
       <footer 
         ref={wrapperRef}
-        className="relative flex min-h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper z-10 border-t border-white/10"
+        className="relative flex min-h-screen w-full flex-col justify-between overflow-hidden bg-black text-white cinematic-footer-wrapper z-10 border-t border-white/10"
       >
         
         {/* Ambient Light & Grid Background */}
@@ -266,7 +266,7 @@ export function CinematicFooter() {
         {/* Giant background text */}
         <div
           ref={giantTextRef}
-          className="footer-giant-bg-text absolute -bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-[-1] pointer-events-none select-none opacity-50"
+          className="footer-giant-bg-text absolute bottom-[15vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-[-1] pointer-events-none select-none opacity-50"
         >
           NOJO
         </div>
