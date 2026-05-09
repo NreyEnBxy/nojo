@@ -59,7 +59,7 @@ export default function CanvasSequence({ frameCount, folderPath, prefix }: Canva
     // Create GSAP ScrollTrigger for the sequence — scoped so cleanup
     // only kills this component's triggers, not the footer's.
     const frameObj = { frame: 0 };
-    const ctx = gsap.context(() => {
+    const gsapCtx = gsap.context(() => {
       gsap.to(frameObj, {
         frame: frameCount - 1,
         snap: 'frame',
@@ -95,7 +95,7 @@ export default function CanvasSequence({ frameCount, folderPath, prefix }: Canva
 
     return () => {
       window.removeEventListener('resize', updateDimensions);
-      ctx.revert(); // Only kills triggers created inside this context
+      gsapCtx.revert(); // Only kills triggers created inside this context
     };
   }, [isLoaded, images, frameCount, currentFrame]);
 

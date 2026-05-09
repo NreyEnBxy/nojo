@@ -510,7 +510,12 @@ export const HorizonHeroSection = () => {
         refs.nebula.material.uniforms.time.value = time * 0.5;
       }
 
-      if (refs.camera && refs.targetCameraX !== undefined) {
+      if (
+        refs.camera && 
+        refs.targetCameraX !== undefined && 
+        refs.targetCameraY !== undefined && 
+        refs.targetCameraZ !== undefined
+      ) {
         const smoothingFactor = 0.05;
         
         smoothCameraPos.current.x += (refs.targetCameraX - smoothCameraPos.current.x) * smoothingFactor;
