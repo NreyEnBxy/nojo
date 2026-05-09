@@ -157,11 +157,11 @@ export default function FlavorsSection() {
             />
 
             {/* Modal Content */}
-            <div className="fixed inset-0 flex items-center justify-center z-[101] pointer-events-none p-4 sm:p-6 md:p-12">
+            <div className="fixed inset-0 flex items-center justify-center z-[999] pointer-events-none p-4 md:p-8 lg:p-12">
               <motion.div
                 layoutId={`card-${selectedVariant.name}`}
                 style={{ backgroundColor: selectedVariant.bgColor }}
-                className="w-full max-w-5xl h-[80vh] md:h-[600px] rounded-3xl overflow-hidden flex flex-col md:flex-row pointer-events-auto relative shadow-2xl border border-white/10"
+                className="w-full max-w-5xl h-fit max-h-[90dvh] rounded-3xl overflow-hidden flex flex-col md:flex-row pointer-events-auto relative shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/10"
               >
                 {/* Close Button */}
                 <button
@@ -169,7 +169,7 @@ export default function FlavorsSection() {
                     if (showCheckout) setShowCheckout(false);
                     else { setSelectedVariant(null); setShowCheckout(false); }
                   }}
-                  className="absolute top-6 right-6 z-50 w-10 h-10 bg-black/50 hover:bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center transition-colors"
+                  className="absolute top-4 right-4 md:top-6 md:right-6 z-[1000] w-10 h-10 bg-black/50 hover:bg-white/20 backdrop-blur-xl rounded-full flex items-center justify-center transition-colors"
                 >
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1L13 13M1 13L13 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -177,7 +177,7 @@ export default function FlavorsSection() {
                 </button>
 
                 {/* Left Side: Image */}
-                <div className="w-full md:w-1/2 h-1/2 md:h-full relative overflow-hidden">
+                <div className="w-full md:w-1/2 h-48 md:h-auto min-h-[250px] md:min-h-full relative overflow-hidden flex-shrink-0">
                   <motion.div className="absolute inset-0 w-full h-full" layoutId={`image-${selectedVariant.name}`}>
                     <Image
                       src={`/frames/flavors/${selectedVariant.image}`}
@@ -185,6 +185,7 @@ export default function FlavorsSection() {
                       fill
                       className="object-cover"
                       sizes="(max-w-768px) 100vw, 50vw"
+                      priority
                     />
                   </motion.div>
                   <motion.div
@@ -195,7 +196,7 @@ export default function FlavorsSection() {
                 </div>
 
                 {/* Right Side: Details or Form */}
-                <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative bg-gradient-to-b from-transparent to-black/50 overflow-y-auto">
+                <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center relative bg-black/40 backdrop-blur-sm overflow-y-auto max-h-[60dvh] md:max-h-none">
                   <AnimatePresence mode="wait">
                     {!showCheckout ? (
                       <motion.div

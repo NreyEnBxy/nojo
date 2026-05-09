@@ -334,7 +334,7 @@ export function CinematicFooter() {
         className="relative min-h-screen md:h-screen w-full pointer-events-none"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
-        <footer className="fixed bottom-0 left-0 flex h-[100dvh] w-full flex-col justify-between overflow-hidden bg-[#000] text-white cinematic-footer-wrapper pointer-events-auto z-0 pb-safe">
+        <footer className="fixed bottom-0 left-0 flex h-[100dvh] w-full flex-col justify-between overflow-hidden bg-[#000] text-white cinematic-footer-wrapper pointer-events-auto z-0 pb-safe transform-gpu translate-z-0">
           
           {/* Ambient Light & Grid Background */}
           <div className="footer-aurora absolute left-1/2 top-1/2 h-[60vh] md:h-[70vh] w-[90vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] md:blur-[100px] pointer-events-none z-0" />

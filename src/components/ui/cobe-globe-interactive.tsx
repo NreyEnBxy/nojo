@@ -87,11 +87,11 @@ export function GlobeInteractive({
       globe = createGlobe(canvas, {
         devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
         width, height: width,
-        phi: 0, theta: 0.2, dark: 0, diffuse: 1.5,
+        phi: 0, theta: 0.2, dark: 1, diffuse: 1.5,
         mapSamples: 16000, mapBrightness: 10,
         baseColor: [1, 1, 1],
-        markerColor: [0.1, 0.2, 0.45],
-        glowColor: [0.94, 0.93, 0.91],
+        markerColor: [1, 0, 0],
+        glowColor: [0.1, 0.1, 0.1],
         markerElevation: 0,
         markers: markers.map((m) => ({ location: m.location, size: 0.025, id: m.id })),
         arcs: [], arcColor: [0.15, 0.3, 0.55],
@@ -142,6 +142,7 @@ export function GlobeInteractive({
         style={{
           width: "100%", height: "100%", cursor: "grab", opacity: 0,
           transition: "opacity 1.2s ease", borderRadius: "50%", touchAction: "none",
+          WebkitBackfaceVisibility: "hidden",
         }}
       />
       {markers.map((m) => (
