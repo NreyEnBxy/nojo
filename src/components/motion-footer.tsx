@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useImperativeHandle } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
@@ -127,28 +127,24 @@ const STYLES = `
   background-clip: text;
   filter: drop-shadow(0px 0px 20px color-mix(in oklch, var(--foreground) 15%, transparent));
 }
-
-/* Initial hidden state for animation — we use JS for this to avoid SSR/CSS flash */
-.footer-reveal-hidden {
-  opacity: 0;
-  visibility: hidden;
-}
 `;
 
 // -------------------------------------------------------------------------
 // 2. MAGNETIC BUTTON PRIMITIVE (Zero Dependency)
 // -------------------------------------------------------------------------
-export type MagneticButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & 
-  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-    as?: React.ElementType;
-  };
+export type MagneticButtonProps = {
+  as?: React.ElementType;
+  className?: string;
+  children?: React.ReactNode;
+  [key: string]: any;
+};
 
 const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
   ({ className, children, as: Component = "button", ...props }, forwardedRef) => {
     const localRef = useRef<HTMLElement>(null);
+    useImperativeHandle(forwardedRef, () => localRef.current as HTMLElement);
 
     useEffect(() => {
-      if (typeof window === "undefined") return;
       const element = localRef.current;
       if (!element) return;
 
@@ -183,25 +179,22 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
           });
         };
 
-        element.addEventListener("mousemove", handleMouseMove as any);
+        element.addEventListener("mousemove", handleMouseMove);
         element.addEventListener("mouseleave", handleMouseLeave);
 
+        // Explicit cleanup for listeners inside the context
         return () => {
-          element.removeEventListener("mousemove", handleMouseMove as any);
+          element.removeEventListener("mousemove", handleMouseMove);
           element.removeEventListener("mouseleave", handleMouseLeave);
         };
       }, element);
 
       return () => ctx.revert();
-    },[]);
+    }, []);
 
     return (
       <Component
-        ref={(node: HTMLElement) => {
-          (localRef as any).current = node;
-          if (typeof forwardedRef === "function") forwardedRef(node);
-          else if (forwardedRef) (forwardedRef as any).current = node;
-        }}
+        ref={localRef}
         className={cn("cursor-pointer", className)}
         {...props}
       >
@@ -235,7 +228,9 @@ export function CinematicFooter() {
     if (typeof window === "undefined") return;
     if (!wrapperRef.current) return;
 
-    // React strict mode compatible GSAP context cleanup
+    // Refresh ScrollTrigger to ensure correct layout calculations
+    ScrollTrigger.refresh();
+
     const ctx = gsap.context(() => {
       // Giant background text parallax
       gsap.fromTo(giantTextRef.current,
@@ -293,11 +288,11 @@ export function CinematicFooter() {
       */}
       <div
         ref={wrapperRef}
-        className="relative h-screen w-full"
+        className="relative h-screen w-full pointer-events-none"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
         {/* The actual footer stays fixed to the viewport underneath everything */}
-        <footer className="fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper">
+        <footer className="fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper pointer-events-auto z-0">
           
           {/* Ambient Light & Grid Background */}
           <div className="footer-aurora absolute left-1/2 top-1/2 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] pointer-events-none z-0" />
