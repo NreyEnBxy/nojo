@@ -102,7 +102,7 @@ export default function CanvasSequence({ frameCount, folderPath, prefix }: Canva
   if (!isLoaded) {
     return (
       <div className="h-screen w-full flex flex-col items-center justify-center bg-black text-white">
-        <div className="text-sm font-light uppercase tracking-widest mb-4">Loading NOJO</div>
+        <div className="text-sm font-normal uppercase tracking-widest mb-4">Loading NOJO</div>
         <div className="w-64 h-1 bg-neutral-800 rounded-full overflow-hidden">
           <div 
             className="h-full bg-white transition-all duration-300 ease-out"
@@ -122,10 +122,10 @@ export default function CanvasSequence({ frameCount, folderPath, prefix }: Canva
         />
         
         <div ref={textRef} className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 text-center">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white mb-6 uppercase drop-shadow-2xl">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-2px] md:tracking-[-6px] leading-[0.9] text-white mb-6 uppercase drop-shadow-2xl">
             First Time In Nigatola
           </h1>
-          <p className="text-lg md:text-xl text-neutral-300 font-light mb-10 max-w-xl mx-auto drop-shadow-xl">
+          <p className="text-lg md:text-xl text-neutral-300 font-normal mb-10 max-w-xl mx-auto drop-shadow-xl">
             Experience the ultimate cold cola splash. Pure, crisp, and dramatically refreshing.
           </p>
           <a href="#product" className="px-8 py-4 bg-white text-black font-medium text-sm tracking-wide rounded-full hover:bg-neutral-200 transition-colors duration-300">

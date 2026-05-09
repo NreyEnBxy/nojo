@@ -81,10 +81,10 @@ export default function TestimonialsSection() {
             </p>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-light tracking-tight mt-5">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-[-2px] md:tracking-[-4px] leading-[0.9] mt-5">
             What they say
           </h2>
-          <p className="text-center mt-6 text-neutral-400 font-light text-lg">
+          <p className="text-center mt-6 text-neutral-400 font-normal text-lg">
             Our most devoted consumers speak their truth. Read the unvarnished opinions of those who have experienced NOJO.
           </p>
         </motion.div>

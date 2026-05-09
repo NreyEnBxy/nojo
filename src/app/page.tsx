@@ -67,11 +67,11 @@ export default function Home() {
           <section id="story" className="py-48 px-6 bg-black z-20 relative">
             <div className="max-w-4xl mx-auto text-center space-y-12">
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-500">The NOJO Philosophy</p>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal leading-snug md:leading-snug lg:leading-tight">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-[0.9] tracking-[-2px]">
                 <span className="text-neutral-300">Born in Nigatola.</span> <br />
                 <span className="text-neutral-500 transition-colors hover:text-neutral-300 duration-500">We rejected the ordinary.</span> <br />
                 <span className="text-neutral-600 transition-colors hover:text-neutral-300 duration-500">We stripped away the noise.</span> <br />
-                <span className="text-white font-medium">We focused entirely on the essence of cold refreshment.</span>
+                <span className="text-white font-bold">We focused entirely on the essence of cold refreshment.</span>
               </h2>
             </div>
           </section>
