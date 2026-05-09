@@ -249,48 +249,72 @@ export function CinematicFooter() {
     if (!wrapperRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Background Parallax & Reveal
+      // 1. Background Giant Text Parallax
       gsap.fromTo(
         giantTextRef.current,
-        { y: "20vh", scale: 0.7, opacity: 0 },
+        { y: "30vh", scale: 0.6, opacity: 0, rotate: -3 },
         {
-          y: "0vh",
-          scale: 1,
+          y: "-5vh",
+          scale: 1.1,
           opacity: 1,
+          rotate: 0,
           ease: "power2.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "top 95%",
+            start: "top 100%",
             end: "bottom bottom",
-            scrub: 1.5,
+            scrub: 2,
           },
         }
       );
 
-      // Smooth Heading & Links Reveal
+      // 2. Aurora/Light Parallax
+      gsap.to(".footer-aurora", {
+        y: "-15vh",
+        scale: 1.2,
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 1.5,
+        }
+      });
+
+      // 3. Main Content Reveal Timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapperRef.current,
-          start: "top 70%",
+          start: "top 75%",
           end: "bottom bottom",
-          scrub: 1,
+          scrub: 1.2,
         }
       });
 
       tl.fromTo(headingRef.current, 
-        { y: 80, opacity: 0, scale: 0.95 }, 
-        { y: 0, opacity: 1, scale: 1, ease: "power3.out" }
+        { y: 160, opacity: 0, skewY: 7, scale: 0.85 }, 
+        { y: 0, opacity: 1, skewY: 0, scale: 1, ease: "expo.out", duration: 1.5 }
       )
       .fromTo(linksRef.current?.children || [], 
-        { y: 30, opacity: 0, scale: 0.9 }, 
-        { y: 0, opacity: 1, scale: 1, stagger: 0.08, ease: "back.out(1.5)" },
-        "-=0.4"
+        { y: 60, opacity: 0, scale: 0.8, rotateX: -45 }, 
+        { y: 0, opacity: 1, scale: 1, rotateX: 0, stagger: 0.1, ease: "back.out(1.2)", duration: 1 },
+        "-=0.6"
       )
       .fromTo(bottomBarRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, ease: "power2.out" },
-        "-=0.2"
+        { y: 80, opacity: 0 },
+        { y: 0, opacity: 1, ease: "power4.out", duration: 1 },
+        "-=0.4"
       );
+
+      // 4. Marquee Speed Reactive to Scroll
+      gsap.to(".animate-footer-scroll-marquee", {
+        timeScale: 3,
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 0.5,
+        }
+      });
 
     }, wrapperRef);
 
