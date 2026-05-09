@@ -53,7 +53,7 @@ export default function ProductSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-neutral-400 text-lg md:text-xl font-light leading-relaxed max-w-lg"
+            className="text-neutral-400 text-lg md:text-xl font-normal leading-relaxed max-w-lg"
           >
             A harmonious blend of deep-roasted complexity and crisp effervescence. Meticulously crafted and chilled to absolute perfection. This is not just cola; it is the definitive cold sensory experience.
           </motion.p>

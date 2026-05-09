@@ -57,7 +57,7 @@ export default function Home() {
               <h2 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-[-2px] md:tracking-[-6px] leading-[0.9] mb-10">
                 Pure. Crisp. Cold.
               </h2>
-              <p className="text-xl md:text-2xl text-white/80 font-light max-w-2xl mx-auto leading-relaxed">
+              <p className="text-xl md:text-2xl text-white/80 font-normal max-w-2xl mx-auto leading-relaxed">
                 Hand-cut crystal ice meets micro-filtered sparkling cola. Every element engineered for the perfect texture, temperature, and taste.
               </p>
             </div>
@@ -67,7 +67,7 @@ export default function Home() {
           <section id="story" className="py-48 px-6 bg-black z-20 relative">
             <div className="max-w-4xl mx-auto text-center space-y-12">
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-500">The NOJO Philosophy</p>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-light leading-snug md:leading-snug lg:leading-tight">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal leading-snug md:leading-snug lg:leading-tight">
                 <span className="text-neutral-300">Born in Nigatola.</span> <br />
                 <span className="text-neutral-500 transition-colors hover:text-neutral-300 duration-500">We rejected the ordinary.</span> <br />
                 <span className="text-neutral-600 transition-colors hover:text-neutral-300 duration-500">We stripped away the noise.</span> <br />
@@ -77,7 +77,7 @@ export default function Home() {
           </section>
 
           {/* 4.5 Typewriter Demo Section */}
-          <section className="w-full min-h-[40vh] md:text-4xl lg:text-6xl sm:text-3xl text-2xl flex flex-row items-center justify-center bg-black font-light overflow-hidden p-16 relative z-20 border-t border-white/5">
+          <section className="w-full min-h-[40vh] md:text-4xl lg:text-6xl sm:text-3xl text-2xl flex flex-row items-center justify-center bg-black font-normal overflow-hidden p-16 relative z-20 border-t border-white/5">
             <div className="whitespace-pre-wrap text-center leading-relaxed">
               <span className="text-neutral-500">{"We were born to be a "}</span>
               <Typewriter
@@ -119,7 +119,7 @@ export default function Home() {
             <div className="max-w-4xl mx-auto w-full text-center mb-16">
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-500 mb-4">Visit Us</p>
               <h2 className="text-4xl md:text-6xl font-bold text-white tracking-[-2px] md:tracking-[-4px] leading-[0.9] mb-6">Our Physical Store</h2>
-              <p className="text-lg text-neutral-400 font-light max-w-2xl mx-auto">
+              <p className="text-lg text-neutral-400 font-normal max-w-2xl mx-auto">
                 Find the essence of cold in our flagship Nigatola locations. Interactive kiosks available for custom flavor profiles.
               </p>
             </div>
@@ -137,7 +137,7 @@ export default function Home() {
               <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-[-2px] md:tracking-[-6px] uppercase mb-6 leading-[0.9]">
                 Experience NOJO
               </h2>
-              <p className="text-xl md:text-2xl font-light text-neutral-400 tracking-widest uppercase mb-16">
+              <p className="text-xl md:text-2xl font-normal text-neutral-400 tracking-widest uppercase mb-16">
                 First Time In Nigatola
               </p>
               <a href="#variants" className="group relative px-12 py-5 bg-white text-black rounded-full overflow-hidden block">

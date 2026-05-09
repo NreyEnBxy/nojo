@@ -136,7 +136,7 @@ export default function FlavorsSection() {
                 className="relative z-10 p-8 transform group-hover:-translate-y-4 transition-transform duration-500 ease-out"
               >
                 <motion.h3 layoutId={`title-${variant.name}`} className="text-2xl font-medium mb-3">{variant.name}</motion.h3>
-                <motion.p layoutId={`desc-${variant.name}`} className="text-neutral-400 font-light text-sm">{variant.desc}</motion.p>
+                <motion.p layoutId={`desc-${variant.name}`} className="text-neutral-400 font-normal text-sm">{variant.desc}</motion.p>
               </motion.div>
             </motion.div>
           ))}
@@ -207,7 +207,7 @@ export default function FlavorsSection() {
                       >
                         <motion.div layoutId={`text-${selectedVariant.name}`} className="relative z-10">
                           <motion.h3 layoutId={`title-${selectedVariant.name}`} className="text-4xl md:text-5xl font-bold mb-4 tracking-[-2px] leading-[0.9]">{selectedVariant.name}</motion.h3>
-                          <motion.p layoutId={`desc-${selectedVariant.name}`} className="text-neutral-300 font-light text-lg mb-8">{selectedVariant.desc}</motion.p>
+                          <motion.p layoutId={`desc-${selectedVariant.name}`} className="text-neutral-300 font-normal text-lg mb-8">{selectedVariant.desc}</motion.p>
                         </motion.div>
 
                         <motion.div
@@ -216,7 +216,7 @@ export default function FlavorsSection() {
                           transition={{ delay: 0.2, duration: 0.5 }}
                           className="space-y-8"
                         >
-                          <p className="text-neutral-400 font-light leading-relaxed">
+                          <p className="text-neutral-400 font-normal leading-relaxed">
                             {selectedVariant.details}
                           </p>
 
