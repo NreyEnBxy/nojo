@@ -54,7 +54,7 @@ export default function Home() {
 
             <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
               <p className="text-sm uppercase tracking-[0.3em] text-white/70 mb-8">The Anatomy of Chill</p>
-              <h2 className="text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter leading-none mb-10">
+              <h2 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-[-2px] md:tracking-[-6px] leading-[0.9] mb-10">
                 Pure. Crisp. Cold.
               </h2>
               <p className="text-xl md:text-2xl text-white/80 font-light max-w-2xl mx-auto leading-relaxed">
@@ -101,7 +101,7 @@ export default function Home() {
           <section className="w-full min-h-screen bg-black py-32 px-6 relative z-20 flex flex-col items-center justify-center border-t border-white/5">
             <div className="max-w-4xl mx-auto w-full text-center mb-16">
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-500 mb-4">The Difference</p>
-              <h2 className="text-4xl md:text-6xl font-light text-white tracking-tight">After Drinking NOJO</h2>
+              <h2 className="text-4xl md:text-6xl font-bold text-white tracking-[-2px] md:tracking-[-4px] leading-[0.9]">After Drinking NOJO</h2>
             </div>
             <ImageComparison
               beforeImage="/images/before-after/before.png"
@@ -118,7 +118,7 @@ export default function Home() {
           <section id="store" className="w-full min-h-screen bg-black py-32 px-6 relative z-20 flex flex-col items-center justify-center border-t border-white/5">
             <div className="max-w-4xl mx-auto w-full text-center mb-16">
               <p className="text-sm uppercase tracking-[0.3em] text-neutral-500 mb-4">Visit Us</p>
-              <h2 className="text-4xl md:text-6xl font-light text-white tracking-tight mb-6">Our Physical Store</h2>
+              <h2 className="text-4xl md:text-6xl font-bold text-white tracking-[-2px] md:tracking-[-4px] leading-[0.9] mb-6">Our Physical Store</h2>
               <p className="text-lg text-neutral-400 font-light max-w-2xl mx-auto">
                 Find the essence of cold in our flagship Nigatola locations. Interactive kiosks available for custom flavor profiles.
               </p>
@@ -134,7 +134,7 @@ export default function Home() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/[0.02] rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
-              <h2 className="text-6xl md:text-8xl lg:text-9xl font-light tracking-tighter uppercase mb-6">
+              <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-[-2px] md:tracking-[-6px] uppercase mb-6 leading-[0.9]">
                 Experience NOJO
               </h2>
               <p className="text-xl md:text-2xl font-light text-neutral-400 tracking-widest uppercase mb-16">

@@ -18,7 +18,7 @@ const STYLES = `
 /* Using Outfit/Helvetica stack */
 
 .cinematic-footer-wrapper {
-  font-family: var(--font-outfit), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   
   /* Pure Black Theme Variables */
@@ -336,7 +336,7 @@ export function CinematicFooter() {
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 md:px-6 mt-16 md:mt-20 w-full max-w-5xl mx-auto">
             <h2
               ref={headingRef}
-              className="text-4xl md:text-8xl lg:text-9xl font-black footer-text-glow tracking-tighter mb-10 md:mb-16 text-center leading-[0.9]"
+              className="text-4xl md:text-8xl lg:text-9xl font-bold footer-text-glow tracking-[-2px] md:tracking-[-6px] mb-10 md:mb-16 text-center leading-[0.9]"
             >
               Ready to <br className="hidden md:block" /> begin?
             </h2>

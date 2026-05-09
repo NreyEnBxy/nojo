@@ -98,7 +98,7 @@ export default function FlavorsSection() {
         <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-neutral-500 mb-4">The Collection</p>
-            <h2 className="text-4xl md:text-6xl font-light tracking-tight">Choose Your Chill</h2>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-[-2px] md:tracking-[-4px] leading-[0.9]">Choose Your Chill</h2>
           </div>
           <button className="text-sm tracking-widest uppercase border-b border-white pb-1 hover:text-neutral-400 hover:border-neutral-400 transition-colors">
             View All Varieties
@@ -206,7 +206,7 @@ export default function FlavorsSection() {
                         className="flex flex-col"
                       >
                         <motion.div layoutId={`text-${selectedVariant.name}`} className="relative z-10">
-                          <motion.h3 layoutId={`title-${selectedVariant.name}`} className="text-4xl md:text-5xl font-medium mb-4 tracking-tight">{selectedVariant.name}</motion.h3>
+                          <motion.h3 layoutId={`title-${selectedVariant.name}`} className="text-4xl md:text-5xl font-bold mb-4 tracking-[-2px] leading-[0.9]">{selectedVariant.name}</motion.h3>
                           <motion.p layoutId={`desc-${selectedVariant.name}`} className="text-neutral-300 font-light text-lg mb-8">{selectedVariant.desc}</motion.p>
                         </motion.div>
 

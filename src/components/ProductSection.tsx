@@ -43,9 +43,9 @@ export default function ProductSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl md:text-7xl font-light tracking-tight leading-tight"
+              className="text-5xl md:text-7xl font-bold tracking-[-2px] md:tracking-[-4px] leading-[0.9]"
             >
-              Uncompromising <br /><span className="font-medium">Refreshment.</span>
+              Uncompromising <br /><span className="font-bold">Refreshment.</span>
             </motion.h2>
           </div>
           <motion.p 
