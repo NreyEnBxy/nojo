@@ -93,7 +93,7 @@ export default function FlavorsSection() {
   }
 
   return (
-    <section id="variants" className="py-40 bg-neutral-950 relative border-t border-white/5 z-20">
+    <section id="variants" className={`py-40 bg-neutral-950 relative border-t border-white/5 transition-all duration-300 ${selectedVariant ? 'z-[9999]' : 'z-20'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-20">
         <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
           <div>
@@ -157,7 +157,7 @@ export default function FlavorsSection() {
             />
 
             {/* Modal Content */}
-            <div className="fixed inset-0 flex items-center justify-center z-[999] pointer-events-none p-4 md:p-8 lg:p-12">
+            <div className="fixed inset-0 flex items-center justify-center z-[10000] pointer-events-none p-4 md:p-8 lg:p-12">
               <motion.div
                 layoutId={`card-${selectedVariant.name}`}
                 style={{ backgroundColor: selectedVariant.bgColor }}
