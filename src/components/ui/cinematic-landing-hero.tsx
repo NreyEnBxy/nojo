@@ -181,15 +181,15 @@ export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement>
 }
 
 export function CinematicHero({ 
-  brandName = "Sobers",
+  brandName = "NUET",
   tagline1 = "Track the journey,",
   tagline2 = "not just the days.",
   cardHeading = "Accountability, redefined.",
-  cardDescription = <><span className="text-white font-semibold">Sobers</span> empowers sponsors and sponsees in 12-step recovery programs with structured accountability, precise sobriety tracking, and beautiful visual timelines.</>,
+  cardDescription = <><span className="text-white font-semibold">NUET</span> empowers individuals with premium accountability, precise tracking, and beautiful visual timelines.</>,
   metricValue = 365,
-  metricLabel = "Days Sober",
-  ctaHeading = "Start your recovery.",
-  ctaDescription = "Join thousands of others in the 12-step program and take control of your timeline today.",
+  metricLabel = "Elite Status",
+  ctaHeading = "Elevate your journey.",
+  ctaDescription = "Join the elite circle of NUET and take control of your experience today.",
   className, 
   ...props 
 }: CinematicHeroProps) {
