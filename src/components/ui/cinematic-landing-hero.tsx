@@ -176,6 +176,7 @@ export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement>
   cardDescription?: React.ReactNode;
   metricValue?: number;
   metricLabel?: string;
+  metricSuffix?: string;
   ctaHeading?: string;
   ctaDescription?: string;
 }
@@ -187,7 +188,8 @@ export function CinematicHero({
   cardHeading = "Accountability, redefined.",
   cardDescription = <><span className="text-white font-semibold">NUET</span> empowers individuals with premium accountability, precise tracking, and beautiful visual timelines.</>,
   metricValue = 82,
-  metricLabel = "K Followers",
+  metricLabel = "Followers",
+  metricSuffix = "K",
   ctaHeading = "Elevate your journey.",
   ctaDescription = "Join the elite circle of NUET and take control of your experience today.",
   className, 
@@ -412,7 +414,10 @@ export function CinematicHero({
                           <circle className="progress-ring" cx="88" cy="88" r="64" fill="none" stroke="#FFFFFF" strokeWidth="12" />
                         </svg>
                         <div className="text-center z-10 flex flex-col items-center">
-                          <span className="counter-val text-4xl font-extrabold tracking-tighter text-white">0</span>
+                          <div className="text-4xl font-extrabold tracking-tighter text-white flex items-baseline">
+                            <span className="counter-val">0</span>
+                            {metricSuffix && <span className="ml-0.5">{metricSuffix}</span>}
+                          </div>
                           <span className="text-[8px] text-blue-200/50 uppercase tracking-[0.1em] font-bold mt-0.5">{metricLabel}</span>
                         </div>
                       </div>
