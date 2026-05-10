@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
             className="text-4xl md:text-6xl lg:text-8xl font-bold text-center max-w-5xl px-6 leading-[0.9] tracking-[-2px] md:tracking-[-6px]"
             style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
           >
-            Privacy is a luxury. <br className="hidden md:block" /> We don&apos;t collect your data. <br className="hidden md:block" /> We only collect your card data.
+            Privacy is a luxury. <br className="hidden md:block" /> We don&apos;t collect your data. <br className="hidden md:block" /> We only collect your card details.
           </h1>
         </BlurFade>
       </div>
