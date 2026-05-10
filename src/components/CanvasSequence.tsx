@@ -118,7 +118,7 @@ export default function CanvasSequence({ frameCount, folderPath, prefix }: Canva
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover will-change-transform"
         />
         
         <div ref={textRef} className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 text-center">

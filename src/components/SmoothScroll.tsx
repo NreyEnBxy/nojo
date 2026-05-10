@@ -13,6 +13,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Check if we are on mobile
+    const isMobile = window.innerWidth < 768;
+    
+    // On mobile, native scrolling is much smoother and more responsive
+    if (isMobile) return;
+
     const lenis = new Lenis({
       duration: 1.5,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -20,7 +26,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      touchMultiplier: 1.5, // Reduced from 2 to avoid jitter
     });
 
     lenisRef.current = lenis;

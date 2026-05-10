@@ -84,11 +84,14 @@ export function GlobeInteractive({
       if (width === 0) return
       if (globe) return // already initialized
 
+      const isMobile = window.innerWidth < 768;
+
       globe = createGlobe(canvas, {
-        devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+        devicePixelRatio: isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2),
         width, height: width,
         phi: 0, theta: 0.2, dark: 0, diffuse: 1.5,
-        mapSamples: 16000, mapBrightness: 10,
+        mapSamples: isMobile ? 4000 : 16000, 
+        mapBrightness: 10,
         baseColor: [1, 1, 1],
         markerColor: [0, 0, 0],
         glowColor: [1, 1, 1],
