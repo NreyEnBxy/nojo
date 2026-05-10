@@ -3,7 +3,6 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button"; // Assuming standard shadcn button exists, but if not I'll use the custom ones from hero
 
 export default function UnlimitedNojoPage() {
   const containerRef = useRef<HTMLDivElement>(null);
