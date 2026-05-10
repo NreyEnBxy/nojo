@@ -393,6 +393,9 @@ export function CinematicFooter() {
                 <MagneticButton as="a" href="/terms" className="footer-glass-pill px-5 md:px-8 py-2.5 md:py-4 rounded-full text-white/50 font-medium text-[10px] md:text-sm hover:text-white">
                   Terms
                 </MagneticButton>
+                <MagneticButton as="a" href="/unlimited-nojo" className="footer-glass-pill px-5 md:px-8 py-2.5 md:py-4 rounded-full text-blue-400 font-bold text-[10px] md:text-sm hover:text-blue-300">
+                  Unlimited NOJO 🎁
+                </MagneticButton>
                 <MagneticButton as="a" href="https://www.supportkori.com/nuet" target="_blank" rel="noopener noreferrer" className="footer-glass-pill px-5 md:px-8 py-2.5 md:py-4 rounded-full text-white/50 font-medium text-[10px] md:text-sm hover:text-white">
                   Support
                 </MagneticButton>
