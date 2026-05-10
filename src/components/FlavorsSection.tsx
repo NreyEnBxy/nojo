@@ -93,25 +93,25 @@ export default function FlavorsSection() {
   }
 
   return (
-    <section id="variants" className={`py-40 bg-neutral-950 relative border-t border-white/5 transition-all duration-300 ${selectedVariant ? 'z-[9999]' : 'z-20'}`}>
+    <section id="variants" className={`py-20 md:py-40 bg-neutral-950 relative border-t border-white/5 transition-all duration-300 ${selectedVariant ? 'z-[9999]' : 'z-20'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-20">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 gap-8">
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-neutral-500 mb-4">The Collection</p>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-[-2px] md:tracking-[-4px] leading-[0.9]">Choose Your Chill</h2>
+            <h2 className="text-3xl md:text-6xl font-bold tracking-[-1px] md:tracking-[-4px] leading-[0.9]">Choose Your Chill</h2>
           </div>
           <button className="text-sm tracking-widest uppercase border-b border-white pb-1 hover:text-neutral-400 hover:border-neutral-400 transition-colors">
             View All Varieties
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {variants.map((variant) => (
             <motion.div
               key={variant.name}
               layoutId={`card-${variant.name}`}
               onClick={() => setSelectedVariant(variant)}
-              className="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl h-[28rem] flex flex-col justify-end overflow-hidden cursor-pointer"
+              className="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl h-[24rem] md:h-[28rem] flex flex-col justify-end overflow-hidden cursor-pointer"
             >
               {/* Image Background */}
               <motion.div className="absolute inset-0" layoutId={`image-${variant.name}`}>
@@ -196,7 +196,7 @@ export default function FlavorsSection() {
                 </div>
 
                 {/* Right Side: Details or Form */}
-                <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center relative bg-black/40 backdrop-blur-sm overflow-y-auto max-h-[60dvh] md:max-h-none">
+                <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center relative bg-black/40 backdrop-blur-sm overflow-y-auto max-h-[50dvh] md:max-h-none">
                   <AnimatePresence mode="wait">
                     {!showCheckout ? (
                       <motion.div
@@ -207,17 +207,17 @@ export default function FlavorsSection() {
                         className="flex flex-col"
                       >
                         <motion.div layoutId={`text-${selectedVariant.name}`} className="relative z-10">
-                          <motion.h3 layoutId={`title-${selectedVariant.name}`} className="text-4xl md:text-5xl font-bold mb-4 tracking-[-2px] leading-[0.9]">{selectedVariant.name}</motion.h3>
-                          <motion.p layoutId={`desc-${selectedVariant.name}`} className="text-neutral-300 font-normal text-lg mb-8">{selectedVariant.desc}</motion.p>
+                          <motion.h3 layoutId={`title-${selectedVariant.name}`} className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 tracking-[-1px] md:tracking-[-2px] leading-[0.9]">{selectedVariant.name}</motion.h3>
+                          <motion.p layoutId={`desc-${selectedVariant.name}`} className="text-neutral-300 font-normal text-base md:text-lg mb-6 md:mb-8">{selectedVariant.desc}</motion.p>
                         </motion.div>
 
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.2, duration: 0.5 }}
-                          className="space-y-8"
+                          className="space-y-4 md:space-y-8"
                         >
-                          <p className="text-neutral-400 font-normal leading-relaxed">
+                          <p className="text-neutral-400 font-normal text-sm md:text-base leading-relaxed">
                             {selectedVariant.details}
                           </p>
 

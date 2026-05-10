@@ -289,11 +289,11 @@ export function CinematicHero({
         .to(".main-card", {
           width: isMobile ? "92vw" : "85vw",
           height: isMobile ? "92vh" : "85vh",
-          borderRadius: isMobile ? "32px" : "40px",
+          borderRadius: isMobile ? "24px" : "40px",
           ease: "expo.inOut",
           duration: 1.8
         }, "pullback")
-        .to(".cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.8 }, "pullback")
+        .to(".cta-wrapper", { scale: isMobile ? 0.9 : 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.8 }, "pullback")
         .to(".main-card", { y: -window.innerHeight - 300, ease: "power3.in", duration: 1.5 });
 
     }, containerRef);
@@ -314,20 +314,20 @@ export function CinematicHero({
 
       {/* BACKGROUND LAYER: Hero Texts */}
       <div className="hero-text-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform transform-style-3d">
-        <h1 className="text-track gsap-reveal text-3d-matte text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
+        <h1 className="text-track gsap-reveal text-3d-matte text-4xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
           {tagline1}
         </h1>
-        <h1 className="text-days gsap-reveal text-silver-matte text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">
+        <h1 className="text-days gsap-reveal text-silver-matte text-4xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter">
           {tagline2}
         </h1>
       </div>
 
       {/* BACKGROUND LAYER 2: Tactile CTA Buttons */}
       <div className="cta-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 gsap-reveal pointer-events-auto will-change-transform">
-        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-silver-matte">
+        <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 tracking-tight text-silver-matte">
           {ctaHeading}
         </h2>
-        <p className="text-muted-foreground text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed">
+        <p className="text-muted-foreground text-base md:text-xl mb-8 md:mb-12 max-w-xl mx-auto font-light leading-relaxed">
           {ctaDescription}
         </p>
         <div className="flex flex-col sm:flex-row gap-6">
@@ -365,16 +365,16 @@ export function CinematicHero({
 
             {/* 1. TOP (Mobile) / RIGHT (Desktop): BRAND NAME */}
             <div className="card-right-text gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full">
-              <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter text-card-silver-matte lg:mt-0">
+              <h2 className="text-5xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter text-card-silver-matte lg:mt-0">
                 {brandName}
               </h2>
             </div>
 
             {/* 2. MIDDLE (Mobile) / CENTER (Desktop): IPHONE MOCKUP */}
-            <div className="mockup-scroll-wrapper order-2 lg:order-2 relative w-full h-[380px] lg:h-[600px] flex items-center justify-center z-10" style={{ perspective: "1000px" }}>
+            <div className="mockup-scroll-wrapper order-2 lg:order-2 relative w-full h-[320px] md:h-[380px] lg:h-[600px] flex items-center justify-center z-10" style={{ perspective: "1000px" }}>
 
               {/* Inner wrapper for safe CSS scaling that doesn't conflict with GSAP */}
-              <div className="relative w-full h-full flex items-center justify-center transform scale-[0.65] md:scale-85 lg:scale-100">
+              <div className="relative w-full h-full flex items-center justify-center transform scale-[0.55] sm:scale-[0.65] md:scale-85 lg:scale-100">
 
                 {/* The iPhone Bezel */}
                 <div

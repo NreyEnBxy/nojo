@@ -66,7 +66,7 @@ const thirdColumn = testimonials.slice(6, 9);
 
 export default function TestimonialsSection() {
   return (
-    <section className="bg-black my-40 relative z-20 border-t border-white/5 py-32">
+    <section className="bg-black my-20 md:my-40 relative z-20 border-t border-white/5 py-16 md:py-32">
       <div className="container z-10 mx-auto px-6 lg:px-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -81,16 +81,16 @@ export default function TestimonialsSection() {
             </p>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold tracking-[-2px] md:tracking-[-4px] leading-[0.9] mt-5">
+          <h2 className="text-3xl md:text-6xl font-bold tracking-[-1px] md:tracking-[-4px] leading-[0.9] mt-5">
             What they say
           </h2>
-          <p className="text-center mt-6 text-neutral-400 font-normal text-lg">
+          <p className="text-center mt-4 md:mt-6 text-neutral-400 font-normal text-base md:text-lg">
             Our most devoted consumers speak their truth. Read the unvarnished opinions of those who have experienced NOJO.
           </p>
         </motion.div>
 
-        <div className="flex justify-center gap-6 mt-20 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] max-h-[500px] md:max-h-[740px] overflow-hidden">
-          <TestimonialsColumn testimonials={testimonials} className="block md:hidden w-full px-4" duration={30} />
+        <div className="flex justify-center gap-6 mt-12 md:mt-20 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] max-h-[500px] md:max-h-[740px] overflow-hidden">
+          <TestimonialsColumn testimonials={testimonials} className="block md:hidden w-full px-2" duration={30} />
           <TestimonialsColumn testimonials={firstColumn} className="hidden md:block" duration={15} />
           <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
           <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />

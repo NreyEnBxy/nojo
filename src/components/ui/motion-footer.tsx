@@ -331,10 +331,10 @@ export function CinematicFooter() {
       
       <div
         ref={wrapperRef}
-        className="relative min-h-screen md:h-screen w-full pointer-events-none"
+        className="relative min-h-[80vh] md:h-screen w-full pointer-events-none"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
-        <footer className="fixed bottom-0 left-0 flex h-[100dvh] w-full flex-col justify-between overflow-hidden bg-[#000] text-white cinematic-footer-wrapper pointer-events-auto z-0 pb-safe transform-gpu translate-z-0">
+        <footer className="fixed bottom-0 left-0 flex min-h-[100dvh] md:h-[100dvh] w-full flex-col justify-between overflow-hidden bg-[#000] text-white cinematic-footer-wrapper pointer-events-auto z-0 pb-safe transform-gpu translate-z-0">
           
           {/* Ambient Light & Grid Background */}
           <div className="footer-aurora absolute left-1/2 top-1/2 h-[60vh] md:h-[70vh] w-[90vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] md:blur-[100px] pointer-events-none z-0" />
@@ -357,10 +357,10 @@ export function CinematicFooter() {
           </div>
 
           {/* 2. Main Center Content */}
-          <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 md:px-6 mt-16 md:mt-20 w-full max-w-5xl mx-auto">
+          <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 md:px-6 mt-20 md:mt-24 mb-10 md:mb-0 w-full max-w-5xl mx-auto">
             <h2
               ref={headingRef}
-              className="text-4xl md:text-8xl lg:text-9xl font-bold footer-text-glow tracking-[-2px] md:tracking-[-6px] mb-10 md:mb-16 text-center leading-[0.9]"
+              className="text-5xl md:text-8xl lg:text-9xl font-bold footer-text-glow tracking-[-2px] md:tracking-[-6px] mb-8 md:mb-16 text-center leading-[0.9]"
             >
               Ready to <br className="hidden md:block" /> begin?
             </h2>

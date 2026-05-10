@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 
 export default function ProductSection() {
   return (
-    <section id="product" className="min-h-screen flex items-center bg-black py-32 px-6 lg:px-20 relative z-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="product" className="min-h-screen flex items-center bg-black py-16 md:py-32 px-6 lg:px-20 relative z-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
         
         {/* Left Side: Image (Slides from Left) */}
         <motion.div 
@@ -43,7 +43,7 @@ export default function ProductSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl md:text-7xl font-bold tracking-[-2px] md:tracking-[-4px] leading-[0.9]"
+              className="text-4xl md:text-7xl font-bold tracking-[-1px] md:tracking-[-4px] leading-[0.9]"
             >
               Uncompromising <br /><span className="font-bold">Refreshment.</span>
             </motion.h2>
@@ -53,7 +53,7 @@ export default function ProductSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-neutral-400 text-lg md:text-xl font-normal leading-relaxed max-w-lg"
+            className="text-neutral-400 text-base md:text-xl font-normal leading-relaxed max-w-lg"
           >
             A harmonious blend of deep-roasted complexity and crisp effervescence. Meticulously crafted and chilled to absolute perfection. This is not just cola; it is the definitive cold sensory experience.
           </motion.p>
