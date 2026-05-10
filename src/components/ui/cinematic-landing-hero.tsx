@@ -237,7 +237,7 @@ export function CinematicHero({
 
   // 2. Complex Cinematic Scroll Timeline
   useEffect(() => {
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const isMobile = window.innerWidth < 768;
 
     const ctx = gsap.context(() => {
       gsap.set(".text-track", { autoAlpha: 0, y: 60, scale: 0.85, filter: "blur(20px)", rotationX: -20 });
@@ -389,13 +389,6 @@ export function CinematicHero({
 
                   {/* Inner Screen Container */}
                   <div className="absolute inset-[7px] bg-[#050914] rounded-[2.5rem] overflow-hidden shadow-[inset_0_0_15px_rgba(0,0,0,1)] text-white z-10">
-                    {/* Unsplash Background for the phone screen */}
-                    <img 
-                      src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
-                      alt="Phone Wallpaper"
-                      className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay"
-                    />
-                    
                     <div className="absolute inset-0 screen-glare z-40 pointer-events-none" aria-hidden="true" />
 
                     {/* Dynamic Island Notch */}

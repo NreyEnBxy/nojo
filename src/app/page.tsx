@@ -8,6 +8,7 @@ import { CinematicFooter } from '@/components/ui/motion-footer';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import { Typewriter } from '@/components/ui/typewriter';
 import { ImageComparison } from '@/components/ui/image-comparison-slider';
+import { CinematicHero } from '@/components/ui/cinematic-landing-hero';
 
 export default function Home() {
   return (
@@ -31,6 +32,9 @@ export default function Home() {
 
           {/* Hero Canvas Animation - KEPT EXACTLY AS IT IS */}
           <CanvasSequence frameCount={210} folderPath="/frames/nojooooooo" prefix="ezgif-frame" />
+
+          {/* Cinematic Hero Section */}
+          <CinematicHero />
 
           {/* 1. Product Section */}
           <ProductSection />
