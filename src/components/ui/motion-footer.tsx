@@ -369,18 +369,19 @@ export function CinematicFooter() {
             <div ref={linksRef} className="flex flex-col items-center gap-6 md:gap-8 w-full">
               {/* App Store Links (Primary) */}
               <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-5 w-full px-4">
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-8 md:px-12 py-4 md:py-6 rounded-full text-white font-bold text-xs md:text-base flex items-center justify-center gap-3 group">
+                <MagneticButton as="a" href="https://www.facebook.com/nigatolauniversityofengineeringandtechnologyNUET" target="_blank" rel="noopener noreferrer" className="footer-glass-pill px-8 md:px-12 py-4 md:py-6 rounded-full text-white font-bold text-xs md:text-base flex items-center justify-center gap-3 group">
                   <svg className="w-5 h-5 md:w-6 md:h-6 text-white/50 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.56.04 2.87.67 3.55 1.76-3.13 1.77-2.62 5.92.35 7.14-.65 1.58-1.57 3.1-2.57 4.03zm-3.21-14.7c-.55 1.4-1.89 2.37-3.25 2.28.09-1.5 1.05-2.82 2.38-3.4 1.25-.57 2.66-.41 3.25.04-.15.35-.26.72-.38 1.08z" />
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
-                  iOS
+                  Follow NUET
                 </MagneticButton>
                 
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-8 md:px-12 py-4 md:py-6 rounded-full text-white font-bold text-xs md:text-base flex items-center justify-center gap-3 group">
-                  <svg className="w-5 h-5 md:w-6 md:h-6 text-white/50 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0004.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0004.5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0222 3.503C15.5902 8.242 13.8533 7.85 12 7.85c-1.8533 0-3.5902.392-5.1369 1.1004L4.841 5.4475a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3436-4.1021-2.6893-7.5743-6.1185-9.4396" />
+                <MagneticButton as="a" href="mailto:contact.nuetvc@gmail.com" className="footer-glass-pill px-8 md:px-12 py-4 md:py-6 rounded-full text-white font-bold text-xs md:text-base flex items-center justify-center gap-3 group">
+                  <svg className="w-5 h-5 md:w-6 md:h-6 text-white/50 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
                   </svg>
-                  Android
+                  Contact VC
                 </MagneticButton>
               </div>
 
