@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import SmoothScroll from '@/components/SmoothScroll';
-import CanvasSequence from '@/components/CanvasSequence';
 import FlavorsSection from '@/components/FlavorsSection';
 import ProductSection from '@/components/ProductSection';
 import { GlobeInteractive } from '@/components/ui/cobe-globe-interactive';
@@ -30,8 +29,6 @@ export default function Home() {
             </a>
           </nav>
 
-          {/* Hero Canvas Animation - KEPT EXACTLY AS IT IS */}
-          <CanvasSequence frameCount={210} folderPath="/frames/nojooooooo" prefix="ezgif-frame" />
 
           {/* Cinematic Hero Section */}
           {/* Cinematic Hero Section */}
