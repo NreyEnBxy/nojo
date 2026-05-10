@@ -387,7 +387,7 @@ export function CinematicFooter() {
 
               {/* Secondary Text Links */}
               <div className="flex flex-wrap justify-center gap-3 md:gap-8 w-full mt-2 md:mt-4 px-4 text-center">
-                <MagneticButton as="a" href="#" className="footer-glass-pill px-5 md:px-8 py-2.5 md:py-4 rounded-full text-white/50 font-medium text-[10px] md:text-sm hover:text-white">
+                <MagneticButton as="a" href="/privacy" className="footer-glass-pill px-5 md:px-8 py-2.5 md:py-4 rounded-full text-white/50 font-medium text-[10px] md:text-sm hover:text-white">
                   Privacy
                 </MagneticButton>
                 <MagneticButton as="a" href="/terms" className="footer-glass-pill px-5 md:px-8 py-2.5 md:py-4 rounded-full text-white/50 font-medium text-[10px] md:text-sm hover:text-white">
