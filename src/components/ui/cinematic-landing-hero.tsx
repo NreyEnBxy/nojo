@@ -181,7 +181,7 @@ export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement>
   ctaDescription?: string;
 }
 
-export function CinematicHero({ 
+export function CinematicHero({
   brandName = "NUET",
   tagline1 = "Track the journey,",
   tagline2 = "not just the days.",
@@ -192,10 +192,10 @@ export function CinematicHero({
   metricSuffix = "K",
   ctaHeading = "Elevate your journey.",
   ctaDescription = "Join the elite circle of NUET and take control of your experience today.",
-  className, 
-  ...props 
+  className,
+  ...props
 }: CinematicHeroProps) {
-  
+
   const containerRef = useRef<HTMLDivElement>(null);
   const mainCardRef = useRef<HTMLDivElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
@@ -207,13 +207,13 @@ export function CinematicHero({
       if (window.scrollY > window.innerHeight * 2) return;
 
       cancelAnimationFrame(requestRef.current);
-      
+
       requestRef.current = requestAnimationFrame(() => {
         if (mainCardRef.current && mockupRef.current) {
           const rect = mainCardRef.current.getBoundingClientRect();
           const mouseX = e.clientX - rect.left;
           const mouseY = e.clientY - rect.top;
-          
+
           mainCardRef.current.style.setProperty("--mouse-x", `${mouseX}px`);
           mainCardRef.current.style.setProperty("--mouse-y", `${mouseY}px`);
 
@@ -235,7 +235,7 @@ export function CinematicHero({
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(requestRef.current);
     };
-  },[]);
+  }, []);
 
   // 2. Complex Cinematic Scroll Timeline
   useEffect(() => {
@@ -280,26 +280,26 @@ export function CinematicHero({
         .fromTo(".card-right-text", { x: 50, autoAlpha: 0, scale: 0.8 }, { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5 }, "<")
         .to({}, { duration: 2.5 })
         .set(".hero-text-wrapper", { autoAlpha: 0 })
-        .set(".cta-wrapper", { autoAlpha: 1 }) 
+        .set(".cta-wrapper", { autoAlpha: 1 })
         .to({}, { duration: 1.5 })
         .to([".mockup-scroll-wrapper", ".floating-badge", ".card-left-text", ".card-right-text"], {
           scale: 0.9, y: -40, z: -200, autoAlpha: 0, ease: "power3.in", duration: 1.2, stagger: 0.05,
         })
         // Responsive card pullback sizing
-        .to(".main-card", { 
-          width: isMobile ? "92vw" : "85vw", 
-          height: isMobile ? "92vh" : "85vh", 
-          borderRadius: isMobile ? "32px" : "40px", 
-          ease: "expo.inOut", 
-          duration: 1.8 
-        }, "pullback") 
+        .to(".main-card", {
+          width: isMobile ? "92vw" : "85vw",
+          height: isMobile ? "92vh" : "85vh",
+          borderRadius: isMobile ? "32px" : "40px",
+          ease: "expo.inOut",
+          duration: 1.8
+        }, "pullback")
         .to(".cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.8 }, "pullback")
         .to(".main-card", { y: -window.innerHeight - 300, ease: "power3.in", duration: 1.5 });
 
     }, containerRef);
 
     return () => ctx.revert();
-  },[metricValue]); 
+  }, [metricValue]);
 
   return (
     <div
@@ -333,7 +333,7 @@ export function CinematicHero({
         <div className="flex flex-col sm:flex-row gap-6">
           <a href="https://www.facebook.com/nigatolauniversityofengineeringandtechnologyNUET" target="_blank" rel="noopener noreferrer" aria-label="Follow on Facebook" className="btn-modern-light flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
             <svg className="w-8 h-8 transition-transform group-hover:scale-105" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
             </svg>
             <div className="text-left">
               <div className="text-[10px] font-bold tracking-wider text-neutral-500 uppercase mb-[-2px]">Follow on</div>
@@ -342,7 +342,7 @@ export function CinematicHero({
           </a>
           <a href="https://www.supportkori.com/nuet" target="_blank" rel="noopener noreferrer" aria-label="Donate Us" className="btn-modern-dark flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-background">
             <svg className="w-7 h-7 transition-transform group-hover:scale-105 text-red-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
             <div className="text-left">
               <div className="text-[10px] font-bold tracking-wider text-neutral-400 uppercase mb-[-2px]">Support us</div>
@@ -362,7 +362,7 @@ export function CinematicHero({
 
           {/* DYNAMIC RESPONSIVE GRID: Flex-col on mobile to force order, Grid on desktop */}
           <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0">
-            
+
             {/* 1. TOP (Mobile) / RIGHT (Desktop): BRAND NAME */}
             <div className="card-right-text gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full">
               <h2 className="text-6xl md:text-[6rem] lg:text-[8rem] font-black uppercase tracking-tighter text-card-silver-matte lg:mt-0">
@@ -372,10 +372,10 @@ export function CinematicHero({
 
             {/* 2. MIDDLE (Mobile) / CENTER (Desktop): IPHONE MOCKUP */}
             <div className="mockup-scroll-wrapper order-2 lg:order-2 relative w-full h-[380px] lg:h-[600px] flex items-center justify-center z-10" style={{ perspective: "1000px" }}>
-              
+
               {/* Inner wrapper for safe CSS scaling that doesn't conflict with GSAP */}
               <div className="relative w-full h-full flex items-center justify-center transform scale-[0.65] md:scale-85 lg:scale-100">
-                
+
                 {/* The iPhone Bezel */}
                 <div
                   ref={mockupRef}
@@ -456,8 +456,8 @@ export function CinematicHero({
                     <span className="text-base lg:text-xl drop-shadow-lg" aria-hidden="true">🔥</span>
                   </div>
                   <div>
-                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">1 Year Streak</p>
-                    <p className="text-blue-200/50 text-[10px] lg:text-xs font-medium">Milestone unlocked</p>
+                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">Our Streak</p>
+                    <p className="text-blue-200/50 text-[10px] lg:text-xs font-medium">Milestone Loading</p>
                   </div>
                 </div>
 
@@ -466,8 +466,8 @@ export function CinematicHero({
                     <span className="text-base lg:text-lg drop-shadow-lg" aria-hidden="true">🤝</span>
                   </div>
                   <div>
-                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">Sponsor Update</p>
-                    <p className="text-blue-200/50 text-[10px] lg:text-xs font-medium">Shared successfully</p>
+                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">Follow NUET</p>
+                    <p className="text-blue-200/50 text-[10px] lg:text-xs font-medium">Be a NUETian</p>
                   </div>
                 </div>
 
