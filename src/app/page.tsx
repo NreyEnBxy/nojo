@@ -8,6 +8,8 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { Typewriter } from '@/components/ui/typewriter';
 import { ImageComparison } from '@/components/ui/image-comparison-slider';
 import { CinematicHero } from '@/components/ui/cinematic-landing-hero';
+import { ProductShowcase } from '@/components/ui/product-showcase';
+
 
 export default function Home() {
   return (
@@ -44,6 +46,10 @@ export default function Home() {
             ctaHeading="Join the NUET elite."
             ctaDescription="Experience the peak of refreshment with our limited edition collections."
           />
+
+          {/* Coca-Cola Inspired Product Showcase */}
+          <ProductShowcase />
+
 
           {/* 1. Product Section */}
           <ProductSection />
