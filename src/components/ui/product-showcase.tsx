@@ -23,7 +23,22 @@ const PRODUCTS = [
     glowColor: "bg-red-600/20",
     buttonColor: "text-red-600",
     detailsLink: "/showcase-details?product=velocity",
-    specs: ["0 CAL", "EXTREME CHILL", "ELECTROLYTES"]
+    specs: ["0 CAL", "EXTREME CHILL", "ELECTROLYTES"],
+    textAlign: "left"
+  },
+  {
+    id: "zenith",
+    title: "Zenith",
+    subtitle: "PREMIUM CRAFT",
+    badge: "Ultra Luxury",
+    description: "The peak of sophistication. A masterclass in minimalist design and pure essence.",
+    image: "/images/showcase/special-edition.png",
+    color: "from-amber-500/60 to-orange-950/80",
+    glowColor: "bg-amber-600/20",
+    buttonColor: "text-amber-600",
+    detailsLink: "/showcase-details?product=zenith",
+    specs: ["GOLD FILTERED", "ARTISAN BLEND", "LIMITED"],
+    textAlign: "right"
   },
   {
     id: "speed",
@@ -36,7 +51,8 @@ const PRODUCTS = [
     glowColor: "bg-blue-600/20",
     buttonColor: "text-blue-600",
     detailsLink: "/showcase-details?product=speed",
-    specs: ["HIGH ENERGY", "BLUE RASPBERRY", "NO LIMITS"]
+    specs: ["HIGH ENERGY", "BLUE RASPBERRY", "NO LIMITS"],
+    textAlign: "left"
   },
   {
     id: "classic",
@@ -49,7 +65,8 @@ const PRODUCTS = [
     glowColor: "bg-neutral-600/20",
     buttonColor: "text-neutral-900",
     detailsLink: "/showcase-details?product=classic",
-    specs: ["PURE MINERAL", "PREMIUM COLA", "ICE FILTERED"]
+    specs: ["PURE MINERAL", "PREMIUM COLA", "ICE FILTERED"],
+    textAlign: "left"
   }
 ];
 
@@ -81,7 +98,6 @@ export function ProductShowcase() {
         }
       );
 
-      // Initial image state
       gsap.set(".showcase-image-layer", { opacity: 0 });
       gsap.set(`.image-layer-${currentIndex}`, { opacity: 1 });
     }, sectionRef);
@@ -124,7 +140,6 @@ export function ProductShowcase() {
       }
     });
 
-    // Fade out text content
     tl.to([contentRef.current, ".floating-spec"], {
       opacity: 0,
       y: -20,
@@ -134,7 +149,6 @@ export function ProductShowcase() {
       ease: "power2.in"
     }, 0);
 
-    // Cross-fade images instantly via GSAP
     tl.to(`.image-layer-${currentIndex}`, { opacity: 0, duration: 0.8, ease: "power2.inOut" }, 0);
     tl.to(`.image-layer-${index}`, { opacity: 1, duration: 0.8, ease: "power2.inOut" }, 0);
   };
@@ -151,10 +165,7 @@ export function ProductShowcase() {
           ref={cardRef}
           className="relative w-full min-h-[85vh] rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] border border-white/5 bg-neutral-900"
         >
-          {/* 
-              OPTIMIZED IMAGE CONTAINER 
-              - Pre-renders all images to eliminate source-switching delay
-          */}
+          {/* Immersive Background Image Layer */}
           <div ref={imageContainerRef} className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
             {PRODUCTS.map((p, i) => (
               <div key={p.id} className={cn("showcase-image-layer absolute inset-0 w-full h-full", `image-layer-${i}`)}>
@@ -169,9 +180,9 @@ export function ProductShowcase() {
               </div>
             ))}
             
-            {/* Direct Overlay Mask */}
             <div className={cn(
                 "absolute inset-0 bg-gradient-to-r transition-all duration-1000",
+                product.textAlign === "right" ? "bg-gradient-to-l" : "bg-gradient-to-r",
                 product.color
             )} />
             <div className="absolute inset-0 bg-black/30" />
@@ -197,11 +208,14 @@ export function ProductShowcase() {
             </svg>
           </div>
 
-          <div className="relative z-30 w-full h-full flex flex-col justify-center items-center lg:items-start p-8 md:p-16 lg:p-24 min-h-[85vh]">
+          <div className={cn(
+            "relative z-30 w-full h-full flex flex-col justify-center p-8 md:p-16 lg:p-24 min-h-[85vh]",
+            product.textAlign === "right" ? "items-center lg:items-end text-center lg:text-right" : "items-center lg:items-start text-center lg:text-left"
+          )}>
             
-            <div ref={contentRef} className="w-full flex flex-col justify-center text-center lg:text-left space-y-8 max-w-4xl">
+            <div ref={contentRef} className="w-full flex flex-col justify-center space-y-8 max-w-4xl">
               <div className="space-y-4">
-                <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
+                <div className={cn("flex flex-col lg:flex-row items-center gap-4 lg:gap-6", product.textAlign === "right" && "lg:flex-row-reverse")}>
                    <span className="px-4 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-white">
                     {product.badge}
                   </span>
@@ -209,12 +223,12 @@ export function ProductShowcase() {
                 <h2 className="text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] text-white drop-shadow-2xl">
                   {product.title}<span className="text-white/40">.</span>
                 </h2>
-                <p className="text-xl md:text-2xl lg:text-3xl font-light text-white/95 max-w-2xl mx-auto lg:mx-0 leading-relaxed drop-shadow-lg">
+                <p className="text-xl md:text-2xl lg:text-3xl font-light text-white/95 max-w-2xl mx-auto lg:ml-auto lg:mr-0 leading-relaxed drop-shadow-lg">
                   {product.description}
                 </p>
               </div>
 
-              <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+              <div className={cn("flex flex-wrap justify-center gap-4", product.textAlign === "right" ? "lg:justify-end" : "lg:justify-start")}>
                 {product.specs.map((spec, i) => (
                   <div key={i} className="floating-spec flex flex-col items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
                     <span className="text-[8px] font-bold tracking-widest text-white/60 mb-1 uppercase">Spec</span>
@@ -236,7 +250,7 @@ export function ProductShowcase() {
               </div>
             </div>
 
-            <div className="absolute top-10 right-10 flex flex-col gap-4 hidden md:flex">
+            <div className={cn("absolute top-10 flex flex-col gap-4 hidden md:flex", product.textAlign === "right" ? "left-10" : "right-10")}>
               <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-4 rounded-2xl rotate-3 shadow-2xl">
                 <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Pressure</p>
                 <p className="text-xl font-black text-white">4.5 BAR</p>

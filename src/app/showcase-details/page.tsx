@@ -25,6 +25,16 @@ const PRODUCT_DATA = {
     profile: "Arctic Lime & Sparkling Essence",
     temp: "-2°C Precision Chilled"
   },
+  zenith: {
+    title: "ZENITH",
+    badge: "Ultra Luxury",
+    image: "/images/showcase/special-edition.png",
+    accent: "text-amber-500",
+    bg: "bg-amber-500/10",
+    description: "The Zenith edition represents the absolute peak of craft refreshment. Each bottle is a testament to minimalist design and the pursuit of pure, unadulterated essence.",
+    profile: "Golden Citrus & Rare Botanicals",
+    temp: "1°C Artisan Chill"
+  },
   speed: {
     title: "SPEED COLLIDE",
     badge: "Exclusive Collab",
