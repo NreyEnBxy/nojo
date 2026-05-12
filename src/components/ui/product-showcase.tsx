@@ -35,6 +35,7 @@ const PRODUCTS = [
     badge: "Ultra Luxury",
     description: "The peak of sophistication. A masterclass in minimalist design and pure essence.",
     image: "/images/showcase/special-edition.png",
+    mobileImage: "/images/showcase/zenith-mob.png",
     color: "from-amber-500/60 to-orange-950/80",
     glowColor: "bg-amber-600/20",
     buttonColor: "text-amber-600",
@@ -177,14 +178,35 @@ export function ProductShowcase() {
           <div ref={imageContainerRef} className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
             {PRODUCTS.map((p, i) => (
               <div key={p.id} className={cn("showcase-image-layer absolute inset-0 w-full h-full", `image-layer-${i}`)}>
-                <Image
-                  src={p.image}
-                  alt={p.title}
-                  fill
-                  className="object-cover w-full h-full block"
-                  style={{ objectFit: 'cover' }}
-                  priority={i === 0}
-                />
+                {p.mobileImage ? (
+                  <>
+                    <Image
+                      src={p.image}
+                      alt={p.title}
+                      fill
+                      className="object-cover w-full h-full hidden md:block"
+                      style={{ objectFit: 'cover' }}
+                      priority={i === 0}
+                    />
+                    <Image
+                      src={p.mobileImage}
+                      alt={p.title}
+                      fill
+                      className="object-cover w-full h-full block md:hidden"
+                      style={{ objectFit: 'cover' }}
+                      priority={i === 0}
+                    />
+                  </>
+                ) : (
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    className="object-cover w-full h-full block"
+                    style={{ objectFit: 'cover' }}
+                    priority={i === 0}
+                  />
+                )}
               </div>
             ))}
             
