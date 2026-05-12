@@ -82,8 +82,18 @@ export function ProductShowcase() {
       );
     }, sectionRef);
 
-    return () => ctx.revert();
-  }, []);
+    const interval = setInterval(() => {
+      if (!isAnimating.current) {
+        const nextIndex = (currentIndex + 1) % PRODUCTS.length;
+        changeSlide(nextIndex);
+      }
+    }, 3000);
+
+    return () => {
+      ctx.revert();
+      clearInterval(interval);
+    };
+  }, [currentIndex]);
 
   const changeSlide = (index: number) => {
     if (isAnimating.current || index === currentIndex) return;
