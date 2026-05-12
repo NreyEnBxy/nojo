@@ -23,7 +23,8 @@ const PRODUCTS = [
     glowColor: "bg-red-600/20",
     buttonColor: "text-red-600",
     detailsLink: "/showcase-details?product=velocity",
-    specs: ["0 CAL", "EXTREME CHILL", "ELECTROLYTES"]
+    specs: ["0 CAL", "EXTREME CHILL", "ELECTROLYTES"],
+    fitMode: "object-contain" // Contain for bottles
   },
   {
     id: "speed",
@@ -36,7 +37,8 @@ const PRODUCTS = [
     glowColor: "bg-blue-600/20",
     buttonColor: "text-blue-600",
     detailsLink: "/showcase-details?product=speed",
-    specs: ["HIGH ENERGY", "BLUE RASPBERRY", "NO LIMITS"]
+    specs: ["HIGH ENERGY", "BLUE RASPBERRY", "NO LIMITS"],
+    fitMode: "object-cover" // Cover for lifestyle/collab photos
   },
   {
     id: "classic",
@@ -49,7 +51,8 @@ const PRODUCTS = [
     glowColor: "bg-neutral-600/20",
     buttonColor: "text-neutral-900",
     detailsLink: "/showcase-details?product=classic",
-    specs: ["PURE MINERAL", "PREMIUM COLA", "ICE FILTERED"]
+    specs: ["PURE MINERAL", "PREMIUM COLA", "ICE FILTERED"],
+    fitMode: "object-contain" // Contain for bottles
   }
 ];
 
@@ -59,14 +62,12 @@ export function ProductShowcase() {
   const cardRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const specsRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
 
   const product = PRODUCTS[currentIndex];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Entrance animation
       gsap.fromTo(
         cardRef.current,
         { opacity: 0, y: 100, scale: 0.98 },
@@ -130,7 +131,6 @@ export function ProductShowcase() {
         background: "black",
       }}
     >
-      {/* Background soft glow */}
       <div className={cn("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl blur-[150px] rounded-full pointer-events-none transition-colors duration-1000", product.glowColor)} />
 
       <div className="w-full h-full max-w-[1600px] relative">
@@ -141,14 +141,13 @@ export function ProductShowcase() {
             product.color
           )}
         >
-          {/* Large Background Decorative Text */}
+          {/* Background Decor */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 opacity-10 pointer-events-none select-none">
             <h2 className="text-[20vw] font-black uppercase tracking-tighter whitespace-nowrap leading-none">
               {product.title}
             </h2>
           </div>
 
-          {/* Coca-Cola style wave */}
           <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
             <svg
               viewBox="0 0 1200 600"
@@ -162,17 +161,14 @@ export function ProductShowcase() {
             </svg>
           </div>
 
-          <div className="relative z-20 w-full h-full flex flex-col lg:grid lg:grid-cols-2 items-center gap-12 p-8 md:p-16 lg:p-24 min-h-[85vh]">
+          <div className="relative z-20 w-full h-full flex flex-col lg:grid lg:grid-cols-2 items-stretch min-h-[85vh]">
             
             {/* Left Column: Text Content */}
-            <div ref={contentRef} className="w-full flex flex-col justify-center text-center lg:text-left space-y-8">
+            <div ref={contentRef} className="w-full flex flex-col justify-center text-center lg:text-left space-y-8 p-8 md:p-16 lg:p-24 z-30">
               <div className="space-y-4">
                 <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
                    <span className="px-4 py-1 rounded-full bg-white/10 border border-white/20 text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-white/90">
                     {product.badge}
-                  </span>
-                  <span className="text-white/40 text-xs md:text-sm font-medium tracking-[0.2em] uppercase">
-                    EST. 2026
                   </span>
                 </div>
                 <h2 className="text-6xl md:text-8xl lg:text-[9rem] font-black tracking-tighter leading-[0.8] text-white">
@@ -185,9 +181,9 @@ export function ProductShowcase() {
 
               <div className="flex flex-wrap justify-center lg:justify-start gap-4">
                 {product.specs.map((spec, i) => (
-                  <div key={i} className="floating-spec flex flex-col items-center justify-center w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-                    <span className="text-[10px] font-bold tracking-widest text-white/50 mb-1 uppercase">Spec</span>
-                    <span className="text-xs font-black text-white text-center leading-tight px-2">{spec}</span>
+                  <div key={i} className="floating-spec flex flex-col items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+                    <span className="text-[8px] font-bold tracking-widest text-white/50 mb-1 uppercase">Spec</span>
+                    <span className="text-[10px] font-black text-white text-center leading-tight px-1">{spec}</span>
                   </div>
                 ))}
               </div>
@@ -205,31 +201,41 @@ export function ProductShowcase() {
               </div>
             </div>
 
-            {/* Right Column: Large Image & Floating Elements */}
+            {/* Right Column: Immersive Image Container */}
             <div
               ref={imageRef}
-              className="w-full h-[400px] lg:h-full relative flex items-center justify-center"
+              className="relative w-full h-full min-h-[400px] lg:min-h-0 flex items-center justify-center overflow-hidden lg:rounded-r-[3rem] md:lg:rounded-r-[4rem]"
             >
-              {/* Product Image */}
-              <div className="relative w-full h-full max-h-[600px] transform transition-transform duration-1000 hover:scale-110 hover:rotate-3">
+              {/* Product Image with Dynamic Fit Mode */}
+              <div className={cn(
+                "relative w-full h-full transform transition-transform duration-1000 hover:scale-105",
+                product.fitMode === "object-contain" ? "p-12 md:p-24" : "p-0"
+              )}>
                 <Image
                   src={product.image}
                   alt={product.title}
                   fill
-                  className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]"
+                  className={cn(
+                    "drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)] transition-all duration-1000",
+                    product.fitMode === "object-contain" ? "object-contain" : "object-cover"
+                  )}
                   priority
                 />
               </div>
 
-              {/* Decorative floating labels in empty space */}
-              <div className="absolute top-0 right-0 md:-right-10 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl rotate-6 hidden md:block">
-                <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Pressure</p>
-                <p className="text-xl font-black text-white">4.5 BAR</p>
-              </div>
-              <div className="absolute bottom-10 left-0 md:-left-10 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl -rotate-6 hidden md:block">
-                <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Purity</p>
-                <p className="text-xl font-black text-white">99.9%</p>
-              </div>
+              {/* Decorative floating labels */}
+              {product.fitMode === "object-contain" && (
+                <>
+                  <div className="absolute top-10 right-10 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl rotate-6 hidden md:block">
+                    <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Pressure</p>
+                    <p className="text-xl font-black text-white">4.5 BAR</p>
+                  </div>
+                  <div className="absolute bottom-20 left-10 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl -rotate-6 hidden md:block">
+                    <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Purity</p>
+                    <p className="text-xl font-black text-white">99.9%</p>
+                  </div>
+                </>
+              )}
             </div>
 
           </div>
