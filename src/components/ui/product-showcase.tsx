@@ -58,7 +58,7 @@ export function ProductShowcase() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
 
   const product = PRODUCTS[currentIndex];
@@ -80,6 +80,10 @@ export function ProductShowcase() {
           },
         }
       );
+
+      // Initial image state
+      gsap.set(".showcase-image-layer", { opacity: 0 });
+      gsap.set(`.image-layer-${currentIndex}`, { opacity: 1 });
     }, sectionRef);
 
     const interval = setInterval(() => {
@@ -103,14 +107,14 @@ export function ProductShowcase() {
       onComplete: () => {
         setCurrentIndex(index);
         gsap.fromTo(
-          [contentRef.current, imageRef.current, ".floating-spec"],
-          { opacity: 0, y: 30, filter: "blur(15px)" },
+          [contentRef.current, ".floating-spec"],
+          { opacity: 0, y: 20, filter: "blur(10px)" },
           {
             opacity: 1,
             y: 0,
             filter: "blur(0px)",
-            duration: 0.8,
-            stagger: 0.1,
+            duration: 0.6,
+            stagger: 0.08,
             ease: "power3.out",
             onComplete: () => {
               isAnimating.current = false;
@@ -120,14 +124,19 @@ export function ProductShowcase() {
       }
     });
 
-    tl.to([contentRef.current, imageRef.current, ".floating-spec"], {
+    // Fade out text content
+    tl.to([contentRef.current, ".floating-spec"], {
       opacity: 0,
-      y: -30,
-      filter: "blur(15px)",
-      duration: 0.5,
-      stagger: 0.05,
-      ease: "power3.in"
-    });
+      y: -20,
+      filter: "blur(10px)",
+      duration: 0.4,
+      stagger: 0.04,
+      ease: "power2.in"
+    }, 0);
+
+    // Cross-fade images instantly via GSAP
+    tl.to(`.image-layer-${currentIndex}`, { opacity: 0, duration: 0.8, ease: "power2.inOut" }, 0);
+    tl.to(`.image-layer-${index}`, { opacity: 1, duration: 0.8, ease: "power2.inOut" }, 0);
   };
 
   return (
@@ -135,7 +144,6 @@ export function ProductShowcase() {
       ref={sectionRef}
       className="relative w-full min-h-screen py-12 md:py-24 px-4 md:px-12 flex items-center justify-center overflow-hidden bg-black"
     >
-      {/* Background soft glow */}
       <div className={cn("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl blur-[150px] rounded-full pointer-events-none transition-colors duration-1000", product.glowColor)} />
 
       <div className="w-full h-full max-w-[1600px] relative">
@@ -144,20 +152,24 @@ export function ProductShowcase() {
           className="relative w-full min-h-[85vh] rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] border border-white/5 bg-neutral-900"
         >
           {/* 
-              STRICT FULL-BLEED IMAGE CONTAINER 
-              - No padding, no margins, touch absolute edges 
+              OPTIMIZED IMAGE CONTAINER 
+              - Pre-renders all images to eliminate source-switching delay
           */}
-          <div ref={imageRef} className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
-            <Image
-              src={product.image}
-              alt={product.title}
-              fill
-              className="object-cover w-full h-full block transition-transform duration-1000"
-              style={{ objectFit: 'cover' }}
-              priority
-            />
+          <div ref={imageContainerRef} className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
+            {PRODUCTS.map((p, i) => (
+              <div key={p.id} className={cn("showcase-image-layer absolute inset-0 w-full h-full", `image-layer-${i}`)}>
+                <Image
+                  src={p.image}
+                  alt={p.title}
+                  fill
+                  className="object-cover w-full h-full block"
+                  style={{ objectFit: 'cover' }}
+                  priority={i === 0}
+                />
+              </div>
+            ))}
             
-            {/* Direct Overlay Mask (No padding) */}
+            {/* Direct Overlay Mask */}
             <div className={cn(
                 "absolute inset-0 bg-gradient-to-r transition-all duration-1000",
                 product.color
@@ -172,7 +184,6 @@ export function ProductShowcase() {
             </h2>
           </div>
 
-          {/* Coca-Cola style wave (Ensured edge-to-edge) */}
           <div className="absolute inset-x-0 bottom-0 z-20 overflow-hidden pointer-events-none">
             <svg
               viewBox="0 0 1200 300"
@@ -188,7 +199,6 @@ export function ProductShowcase() {
 
           <div className="relative z-30 w-full h-full flex flex-col justify-center items-center lg:items-start p-8 md:p-16 lg:p-24 min-h-[85vh]">
             
-            {/* Overlaid Content (Has padding for legibility, but image behind it is full-bleed) */}
             <div ref={contentRef} className="w-full flex flex-col justify-center text-center lg:text-left space-y-8 max-w-4xl">
               <div className="space-y-4">
                 <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
@@ -226,7 +236,6 @@ export function ProductShowcase() {
               </div>
             </div>
 
-            {/* Technical Labels */}
             <div className="absolute top-10 right-10 flex flex-col gap-4 hidden md:flex">
               <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-4 rounded-2xl rotate-3 shadow-2xl">
                 <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Pressure</p>
@@ -240,7 +249,6 @@ export function ProductShowcase() {
 
           </div>
 
-          {/* Navigation UI */}
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex gap-4">
             {PRODUCTS.map((_, idx) => (
               <button
@@ -258,7 +266,6 @@ export function ProductShowcase() {
           </div>
         </div>
 
-        {/* Side Arrows */}
         <button 
           onClick={() => changeSlide((currentIndex - 1 + PRODUCTS.length) % PRODUCTS.length)}
           className="absolute left-4 md:-left-12 lg:-left-20 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110"
