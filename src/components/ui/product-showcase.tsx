@@ -19,12 +19,11 @@ const PRODUCTS = [
     badge: "Limited Release",
     description: "Engineered for high-performance refreshment with a precision-chilled finish.",
     image: "/images/showcase-product.png",
-    color: "from-red-600 to-red-900",
+    color: "from-red-600/80 to-red-900/90",
     glowColor: "bg-red-600/20",
     buttonColor: "text-red-600",
     detailsLink: "/showcase-details?product=velocity",
-    specs: ["0 CAL", "EXTREME CHILL", "ELECTROLYTES"],
-    fitMode: "object-contain" // Contain for bottles
+    specs: ["0 CAL", "EXTREME CHILL", "ELECTROLYTES"]
   },
   {
     id: "speed",
@@ -33,12 +32,11 @@ const PRODUCTS = [
     badge: "Exclusive",
     description: "The official IShowSpeed energy blend. Unstoppable power in every sip.",
     image: "/images/showcase/ishowspeed.jpeg",
-    color: "from-blue-600 to-indigo-900",
+    color: "from-blue-600/80 to-indigo-900/90",
     glowColor: "bg-blue-600/20",
     buttonColor: "text-blue-600",
     detailsLink: "/showcase-details?product=speed",
-    specs: ["HIGH ENERGY", "BLUE RASPBERRY", "NO LIMITS"],
-    fitMode: "object-cover" // Cover for lifestyle/collab photos
+    specs: ["HIGH ENERGY", "BLUE RASPBERRY", "NO LIMITS"]
   },
   {
     id: "classic",
@@ -47,12 +45,11 @@ const PRODUCTS = [
     badge: "The Original",
     description: "The foundation of cold refreshment. Timeless taste, refined for the elite.",
     image: "/images/showcase/nojo bottle.jpeg",
-    color: "from-neutral-800 to-neutral-950",
+    color: "from-neutral-800/80 to-neutral-950/90",
     glowColor: "bg-neutral-600/20",
     buttonColor: "text-neutral-900",
     detailsLink: "/showcase-details?product=classic",
-    specs: ["PURE MINERAL", "PREMIUM COLA", "ICE FILTERED"],
-    fitMode: "object-contain" // Contain for bottles
+    specs: ["PURE MINERAL", "PREMIUM COLA", "ICE FILTERED"]
   }
 ];
 
@@ -131,24 +128,40 @@ export function ProductShowcase() {
         background: "black",
       }}
     >
+      {/* Background soft glow */}
       <div className={cn("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl blur-[150px] rounded-full pointer-events-none transition-colors duration-1000", product.glowColor)} />
 
       <div className="w-full h-full max-w-[1600px] relative">
         <div
           ref={cardRef}
-          className={cn(
-            "relative w-full min-h-[85vh] rounded-[3rem] md:rounded-[4rem] overflow-hidden bg-gradient-to-br shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] transition-all duration-1000 border border-white/5",
-            product.color
-          )}
+          className="relative w-full min-h-[85vh] rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] transition-all duration-1000 border border-white/5"
         >
-          {/* Background Decor */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 opacity-10 pointer-events-none select-none">
-            <h2 className="text-[20vw] font-black uppercase tracking-tighter whitespace-nowrap leading-none">
+          {/* FULLSCREEN BACKGROUND IMAGE */}
+          <div ref={imageRef} className="absolute inset-0 z-0">
+            <Image
+              src={product.image}
+              alt={product.title}
+              fill
+              className="object-cover transition-all duration-1000"
+              priority
+            />
+            {/* Cinematic Gradient Overlay for Readability */}
+            <div className={cn(
+                "absolute inset-0 bg-gradient-to-r transition-all duration-1000",
+                product.color
+            )} />
+            <div className="absolute inset-0 bg-black/20" />
+          </div>
+
+          {/* Background Decor Text (Layered behind main content) */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-10 pointer-events-none select-none">
+            <h2 className="text-[25vw] font-black uppercase tracking-tighter whitespace-nowrap leading-none text-white">
               {product.title}
             </h2>
           </div>
 
-          <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+          {/* Coca-Cola style wave */}
+          <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
             <svg
               viewBox="0 0 1200 600"
               preserveAspectRatio="none"
@@ -161,29 +174,30 @@ export function ProductShowcase() {
             </svg>
           </div>
 
-          <div className="relative z-20 w-full h-full flex flex-col lg:grid lg:grid-cols-2 items-stretch min-h-[85vh]">
+          <div className="relative z-30 w-full h-full flex flex-col justify-center items-center lg:items-start p-8 md:p-16 lg:p-24 min-h-[85vh]">
             
-            {/* Left Column: Text Content */}
-            <div ref={contentRef} className="w-full flex flex-col justify-center text-center lg:text-left space-y-8 p-8 md:p-16 lg:p-24 z-30">
+            {/* Overlay Content */}
+            <div ref={contentRef} className="w-full flex flex-col justify-center text-center lg:text-left space-y-8 max-w-4xl">
               <div className="space-y-4">
                 <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
-                   <span className="px-4 py-1 rounded-full bg-white/10 border border-white/20 text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-white/90">
+                   <span className="px-4 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-white">
                     {product.badge}
                   </span>
                 </div>
-                <h2 className="text-6xl md:text-8xl lg:text-[9rem] font-black tracking-tighter leading-[0.8] text-white">
-                  {product.title}<span className="text-white/20">.</span>
+                <h2 className="text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] text-white drop-shadow-2xl">
+                  {product.title}<span className="text-white/40">.</span>
                 </h2>
-                <p className="text-lg md:text-2xl font-light text-white/70 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                <p className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed drop-shadow-lg">
                   {product.description}
                 </p>
               </div>
 
+              {/* Floating Specs */}
               <div className="flex flex-wrap justify-center lg:justify-start gap-4">
                 {product.specs.map((spec, i) => (
-                  <div key={i} className="floating-spec flex flex-col items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-                    <span className="text-[8px] font-bold tracking-widest text-white/50 mb-1 uppercase">Spec</span>
-                    <span className="text-[10px] font-black text-white text-center leading-tight px-1">{spec}</span>
+                  <div key={i} className="floating-spec flex flex-col items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
+                    <span className="text-[8px] font-bold tracking-widest text-white/60 mb-1 uppercase">Spec</span>
+                    <span className="text-[10px] md:text-xs font-black text-white text-center leading-tight px-1">{spec}</span>
                   </div>
                 ))}
               </div>
@@ -191,7 +205,7 @@ export function ProductShowcase() {
               <div className="pt-6">
                 <Link
                   href={product.detailsLink}
-                  className="group relative inline-flex items-center justify-center px-10 py-5 bg-white rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_20px_40px_rgba(255,255,255,0.3)] hover:-translate-y-1"
+                  className="group relative inline-flex items-center justify-center px-12 py-5 bg-white rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_20px_50px_rgba(255,255,255,0.4)] hover:-translate-y-1"
                 >
                   <span className={cn("relative z-10 font-black uppercase tracking-widest text-base", product.buttonColor)}>
                     Explore Details
@@ -201,47 +215,22 @@ export function ProductShowcase() {
               </div>
             </div>
 
-            {/* Right Column: Immersive Image Container */}
-            <div
-              ref={imageRef}
-              className="relative w-full h-full min-h-[400px] lg:min-h-0 flex items-center justify-center overflow-hidden lg:rounded-r-[3rem] md:lg:rounded-r-[4rem]"
-            >
-              {/* Product Image with Dynamic Fit Mode */}
-              <div className={cn(
-                "relative w-full h-full transform transition-transform duration-1000 hover:scale-105",
-                product.fitMode === "object-contain" ? "p-12 md:p-24" : "p-0"
-              )}>
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  fill
-                  className={cn(
-                    "drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)] transition-all duration-1000",
-                    product.fitMode === "object-contain" ? "object-contain" : "object-cover"
-                  )}
-                  priority
-                />
+            {/* Technical Labels (Moved to fit the new layout) */}
+            <div className="absolute top-10 right-10 flex flex-col gap-4 hidden md:flex">
+              <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-4 rounded-2xl rotate-3 shadow-2xl">
+                <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Pressure</p>
+                <p className="text-xl font-black text-white">4.5 BAR</p>
               </div>
-
-              {/* Decorative floating labels */}
-              {product.fitMode === "object-contain" && (
-                <>
-                  <div className="absolute top-10 right-10 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl rotate-6 hidden md:block">
-                    <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Pressure</p>
-                    <p className="text-xl font-black text-white">4.5 BAR</p>
-                  </div>
-                  <div className="absolute bottom-20 left-10 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl -rotate-6 hidden md:block">
-                    <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Purity</p>
-                    <p className="text-xl font-black text-white">99.9%</p>
-                  </div>
-                </>
-              )}
+              <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-4 rounded-2xl -rotate-3 shadow-2xl">
+                <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Purity</p>
+                <p className="text-xl font-black text-white">99.9%</p>
+              </div>
             </div>
 
           </div>
 
           {/* Bottom Navigation Dots */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex gap-4">
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex gap-4">
             {PRODUCTS.map((_, idx) => (
               <button
                 key={idx}
@@ -250,7 +239,7 @@ export function ProductShowcase() {
                   "w-2 h-2 rounded-full transition-all duration-500",
                   currentIndex === idx 
                     ? "bg-white w-10" 
-                    : "bg-white/20 hover:bg-white/40"
+                    : "bg-white/30 hover:bg-white/50"
                 )}
                 aria-label={`Go to slide ${idx + 1}`}
               />
@@ -261,13 +250,13 @@ export function ProductShowcase() {
         {/* Side Navigation Arrows */}
         <button 
           onClick={() => changeSlide((currentIndex - 1 + PRODUCTS.length) % PRODUCTS.length)}
-          className="absolute left-4 md:-left-12 lg:-left-20 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/10 transition-all hover:scale-110"
+          className="absolute left-4 md:-left-12 lg:-left-20 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" /></svg>
         </button>
         <button 
           onClick={() => changeSlide((currentIndex + 1) % PRODUCTS.length)}
-          className="absolute right-4 md:-right-12 lg:-right-20 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/10 transition-all hover:scale-110"
+          className="absolute right-4 md:-right-12 lg:-right-20 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7" /></svg>
         </button>
