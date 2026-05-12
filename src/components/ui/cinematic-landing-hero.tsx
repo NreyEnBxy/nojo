@@ -202,7 +202,7 @@ export function CinematicHero({
   tagline2 = "not just the days.",
   cardHeading = "Accountability, redefined.",
   cardDescription = <><span className="text-white font-semibold">NUET</span> empowers individuals with premium accountability, precise tracking, and beautiful visual timelines.</>,
-  metricValue = 82,
+  metricValue = 90,
   metricLabel = "Followers",
   metricSuffix = "K",
   ctaHeading = "Elevate your journey.",

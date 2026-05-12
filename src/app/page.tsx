@@ -38,7 +38,7 @@ export default function Home() {
             tagline2="premium refreshment."
             cardHeading="Exclusivity, redefined."
             cardDescription={<><span className="text-white font-semibold">NUET</span> delivers an unparalleled experience for those who demand the finest in cold refreshment and minimalist design.</>}
-            metricValue={82}
+            metricValue={90}
             metricSuffix="K"
             metricLabel="Followers"
             ctaHeading="Join the NUET elite."
