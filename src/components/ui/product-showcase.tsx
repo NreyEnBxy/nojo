@@ -87,7 +87,7 @@ export function ProductShowcase() {
         const nextIndex = (currentIndex + 1) % PRODUCTS.length;
         changeSlide(nextIndex);
       }
-    }, 3000);
+    }, 10000);
 
     return () => {
       ctx.revert();
