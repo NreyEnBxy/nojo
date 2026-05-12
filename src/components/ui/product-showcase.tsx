@@ -19,7 +19,7 @@ const PRODUCTS = [
     badge: "Limited Release",
     description: "Engineered for high-performance refreshment with a precision-chilled finish.",
     image: "/images/showcase-product.png",
-    color: "from-red-600/80 to-red-900/90",
+    color: "from-red-600/60 to-red-950/80",
     glowColor: "bg-red-600/20",
     buttonColor: "text-red-600",
     detailsLink: "/showcase-details?product=velocity",
@@ -32,7 +32,7 @@ const PRODUCTS = [
     badge: "Exclusive",
     description: "The official IShowSpeed energy blend. Unstoppable power in every sip.",
     image: "/images/showcase/ishowspeed.jpeg",
-    color: "from-blue-600/80 to-indigo-900/90",
+    color: "from-blue-600/60 to-indigo-950/80",
     glowColor: "bg-blue-600/20",
     buttonColor: "text-blue-600",
     detailsLink: "/showcase-details?product=speed",
@@ -45,7 +45,7 @@ const PRODUCTS = [
     badge: "The Original",
     description: "The foundation of cold refreshment. Timeless taste, refined for the elite.",
     image: "/images/showcase/nojo bottle.jpeg",
-    color: "from-neutral-800/80 to-neutral-950/90",
+    color: "from-neutral-800/60 to-black/80",
     glowColor: "bg-neutral-600/20",
     buttonColor: "text-neutral-900",
     detailsLink: "/showcase-details?product=classic",
@@ -123,10 +123,7 @@ export function ProductShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-screen py-12 md:py-24 px-4 md:px-12 flex items-center justify-center overflow-hidden"
-      style={{
-        background: "black",
-      }}
+      className="relative w-full min-h-screen py-12 md:py-24 px-4 md:px-12 flex items-center justify-center overflow-hidden bg-black"
     >
       {/* Background soft glow */}
       <div className={cn("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl blur-[150px] rounded-full pointer-events-none transition-colors duration-1000", product.glowColor)} />
@@ -134,49 +131,54 @@ export function ProductShowcase() {
       <div className="w-full h-full max-w-[1600px] relative">
         <div
           ref={cardRef}
-          className="relative w-full min-h-[85vh] rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] transition-all duration-1000 border border-white/5"
+          className="relative w-full min-h-[85vh] rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] border border-white/5 bg-neutral-900"
         >
-          {/* FULLSCREEN BACKGROUND IMAGE */}
-          <div ref={imageRef} className="absolute inset-0 z-0">
+          {/* 
+              STRICT FULL-BLEED IMAGE CONTAINER 
+              - No padding, no margins, touch absolute edges 
+          */}
+          <div ref={imageRef} className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
             <Image
               src={product.image}
               alt={product.title}
               fill
-              className="object-cover transition-all duration-1000"
+              className="object-cover w-full h-full block transition-transform duration-1000"
+              style={{ objectFit: 'cover' }}
               priority
             />
-            {/* Cinematic Gradient Overlay for Readability */}
+            
+            {/* Direct Overlay Mask (No padding) */}
             <div className={cn(
                 "absolute inset-0 bg-gradient-to-r transition-all duration-1000",
                 product.color
             )} />
-            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-black/30" />
           </div>
 
-          {/* Background Decor Text (Layered behind main content) */}
+          {/* Background Decor Text */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-10 pointer-events-none select-none">
             <h2 className="text-[25vw] font-black uppercase tracking-tighter whitespace-nowrap leading-none text-white">
               {product.title}
             </h2>
           </div>
 
-          {/* Coca-Cola style wave */}
-          <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
+          {/* Coca-Cola style wave (Ensured edge-to-edge) */}
+          <div className="absolute inset-x-0 bottom-0 z-20 overflow-hidden pointer-events-none">
             <svg
-              viewBox="0 0 1200 600"
+              viewBox="0 0 1200 300"
               preserveAspectRatio="none"
-              className="absolute bottom-0 w-full h-full opacity-10"
+              className="w-full h-[300px] opacity-10"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M0 450C300 350 600 550 1200 450V600H0V450Z" fill="white" />
-              <path d="M0 500C400 450 800 550 1200 500V600H0V500Z" fill="white" className="opacity-50" />
+              <path d="M0 200C300 100 600 300 1200 200V300H0V200Z" fill="white" />
+              <path d="M0 250C400 200 800 300 1200 250V300H0V250Z" fill="white" className="opacity-50" />
             </svg>
           </div>
 
           <div className="relative z-30 w-full h-full flex flex-col justify-center items-center lg:items-start p-8 md:p-16 lg:p-24 min-h-[85vh]">
             
-            {/* Overlay Content */}
+            {/* Overlaid Content (Has padding for legibility, but image behind it is full-bleed) */}
             <div ref={contentRef} className="w-full flex flex-col justify-center text-center lg:text-left space-y-8 max-w-4xl">
               <div className="space-y-4">
                 <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
@@ -187,12 +189,11 @@ export function ProductShowcase() {
                 <h2 className="text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] text-white drop-shadow-2xl">
                   {product.title}<span className="text-white/40">.</span>
                 </h2>
-                <p className="text-xl md:text-2xl lg:text-3xl font-light text-white/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed drop-shadow-lg">
+                <p className="text-xl md:text-2xl lg:text-3xl font-light text-white/95 max-w-2xl mx-auto lg:mx-0 leading-relaxed drop-shadow-lg">
                   {product.description}
                 </p>
               </div>
 
-              {/* Floating Specs */}
               <div className="flex flex-wrap justify-center lg:justify-start gap-4">
                 {product.specs.map((spec, i) => (
                   <div key={i} className="floating-spec flex flex-col items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
@@ -215,7 +216,7 @@ export function ProductShowcase() {
               </div>
             </div>
 
-            {/* Technical Labels (Moved to fit the new layout) */}
+            {/* Technical Labels */}
             <div className="absolute top-10 right-10 flex flex-col gap-4 hidden md:flex">
               <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-4 rounded-2xl rotate-3 shadow-2xl">
                 <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Pressure</p>
@@ -229,7 +230,7 @@ export function ProductShowcase() {
 
           </div>
 
-          {/* Bottom Navigation Dots */}
+          {/* Navigation UI */}
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex gap-4">
             {PRODUCTS.map((_, idx) => (
               <button
@@ -247,7 +248,7 @@ export function ProductShowcase() {
           </div>
         </div>
 
-        {/* Side Navigation Arrows */}
+        {/* Side Arrows */}
         <button 
           onClick={() => changeSlide((currentIndex - 1 + PRODUCTS.length) % PRODUCTS.length)}
           className="absolute left-4 md:-left-12 lg:-left-20 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110"
