@@ -24,7 +24,9 @@ const PRODUCTS = [
     buttonColor: "text-red-600",
     detailsLink: "/showcase-details?product=velocity",
     specs: ["0 CAL", "EXTREME CHILL", "ELECTROLYTES"],
-    textAlign: "left"
+    textAlign: "left",
+    hideContent: false,
+    buttonText: "Explore Details"
   },
   {
     id: "zenith",
@@ -38,7 +40,9 @@ const PRODUCTS = [
     buttonColor: "text-amber-600",
     detailsLink: "/showcase-details?product=zenith",
     specs: ["GOLD FILTERED", "ARTISAN BLEND", "LIMITED"],
-    textAlign: "right"
+    textAlign: "right",
+    hideContent: true, // User requested no text/overlay
+    buttonText: "Learn More"
   },
   {
     id: "speed",
@@ -52,7 +56,9 @@ const PRODUCTS = [
     buttonColor: "text-blue-600",
     detailsLink: "/showcase-details?product=speed",
     specs: ["HIGH ENERGY", "BLUE RASPBERRY", "NO LIMITS"],
-    textAlign: "left"
+    textAlign: "left",
+    hideContent: false,
+    buttonText: "Explore Details"
   },
   {
     id: "classic",
@@ -66,7 +72,9 @@ const PRODUCTS = [
     buttonColor: "text-neutral-900",
     detailsLink: "/showcase-details?product=classic",
     specs: ["PURE MINERAL", "PREMIUM COLA", "ICE FILTERED"],
-    textAlign: "left"
+    textAlign: "left",
+    hideContent: false,
+    buttonText: "Explore Details"
   }
 ];
 
@@ -180,20 +188,27 @@ export function ProductShowcase() {
               </div>
             ))}
             
-            <div className={cn(
-                "absolute inset-0 bg-gradient-to-r transition-all duration-1000",
-                product.textAlign === "right" ? "bg-gradient-to-l" : "bg-gradient-to-r",
-                product.color
-            )} />
-            <div className="absolute inset-0 bg-black/30" />
+            {/* Direct Overlay Mask (Conditionally hidden for Zenith) */}
+            {!product.hideContent && (
+              <>
+                <div className={cn(
+                    "absolute inset-0 bg-gradient-to-r transition-all duration-1000",
+                    product.textAlign === "right" ? "bg-gradient-to-l" : "bg-gradient-to-r",
+                    product.color
+                )} />
+                <div className="absolute inset-0 bg-black/30" />
+              </>
+            )}
           </div>
 
-          {/* Background Decor Text */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-10 pointer-events-none select-none">
-            <h2 className="text-[25vw] font-black uppercase tracking-tighter whitespace-nowrap leading-none text-white">
-              {product.title}
-            </h2>
-          </div>
+          {/* Background Decor Text (Conditionally hidden) */}
+          {!product.hideContent && (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-10 pointer-events-none select-none">
+              <h2 className="text-[25vw] font-black uppercase tracking-tighter whitespace-nowrap leading-none text-white">
+                {product.title}
+              </h2>
+            </div>
+          )}
 
           <div className="absolute inset-x-0 bottom-0 z-20 overflow-hidden pointer-events-none">
             <svg
@@ -215,27 +230,35 @@ export function ProductShowcase() {
             
             <div ref={contentRef} className="w-full flex flex-col justify-center space-y-8 max-w-4xl">
               <div className="space-y-4">
-                <div className={cn("flex flex-col lg:flex-row items-center gap-4 lg:gap-6", product.textAlign === "right" && "lg:flex-row-reverse")}>
-                   <span className="px-4 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-white">
-                    {product.badge}
-                  </span>
-                </div>
-                <h2 className="text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] text-white drop-shadow-2xl">
-                  {product.title}<span className="text-white/40">.</span>
-                </h2>
-                <p className="text-xl md:text-2xl lg:text-3xl font-light text-white/95 max-w-2xl mx-auto lg:ml-auto lg:mr-0 leading-relaxed drop-shadow-lg">
-                  {product.description}
-                </p>
+                {/* Text content shown conditionally */}
+                {!product.hideContent && (
+                  <>
+                    <div className={cn("flex flex-col lg:flex-row items-center gap-4 lg:gap-6", product.textAlign === "right" && "lg:flex-row-reverse")}>
+                      <span className="px-4 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-white">
+                        {product.badge}
+                      </span>
+                    </div>
+                    <h2 className="text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] text-white drop-shadow-2xl">
+                      {product.title}<span className="text-white/40">.</span>
+                    </h2>
+                    <p className="text-xl md:text-2xl lg:text-3xl font-light text-white/95 max-w-2xl mx-auto lg:ml-auto lg:mr-0 leading-relaxed drop-shadow-lg">
+                      {product.description}
+                    </p>
+                  </>
+                )}
               </div>
 
-              <div className={cn("flex flex-wrap justify-center gap-4", product.textAlign === "right" ? "lg:justify-end" : "lg:justify-start")}>
-                {product.specs.map((spec, i) => (
-                  <div key={i} className="floating-spec flex flex-col items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
-                    <span className="text-[8px] font-bold tracking-widest text-white/60 mb-1 uppercase">Spec</span>
-                    <span className="text-[10px] md:text-xs font-black text-white text-center leading-tight px-1">{spec}</span>
-                  </div>
-                ))}
-              </div>
+              {/* Floating Specs shown conditionally */}
+              {!product.hideContent && (
+                <div className={cn("flex flex-wrap justify-center gap-4", product.textAlign === "right" ? "lg:justify-end" : "lg:justify-start")}>
+                  {product.specs.map((spec, i) => (
+                    <div key={i} className="floating-spec flex flex-col items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
+                      <span className="text-[8px] font-bold tracking-widest text-white/60 mb-1 uppercase">Spec</span>
+                      <span className="text-[10px] md:text-xs font-black text-white text-center leading-tight px-1">{spec}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               <div className="pt-6">
                 <Link
@@ -243,23 +266,26 @@ export function ProductShowcase() {
                   className="group relative inline-flex items-center justify-center px-12 py-5 bg-white rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_20px_50px_rgba(255,255,255,0.4)] hover:-translate-y-1"
                 >
                   <span className={cn("relative z-10 font-black uppercase tracking-widest text-base", product.buttonColor)}>
-                    Explore Details
+                    {product.buttonText}
                   </span>
                   <div className="absolute inset-0 bg-neutral-100 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
                 </Link>
               </div>
             </div>
 
-            <div className={cn("absolute top-10 flex flex-col gap-4 hidden md:flex", product.textAlign === "right" ? "left-10" : "right-10")}>
-              <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-4 rounded-2xl rotate-3 shadow-2xl">
-                <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Pressure</p>
-                <p className="text-xl font-black text-white">4.5 BAR</p>
+            {/* Technical Labels hidden for minimal view */}
+            {!product.hideContent && (
+              <div className={cn("absolute top-10 flex flex-col gap-4 hidden md:flex", product.textAlign === "right" ? "left-10" : "right-10")}>
+                <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-4 rounded-2xl rotate-3 shadow-2xl">
+                  <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Pressure</p>
+                  <p className="text-xl font-black text-white">4.5 BAR</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-4 rounded-2xl -rotate-3 shadow-2xl">
+                  <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Purity</p>
+                  <p className="text-xl font-black text-white">99.9%</p>
+                </div>
               </div>
-              <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-4 rounded-2xl -rotate-3 shadow-2xl">
-                <p className="text-[10px] font-bold text-white/50 uppercase mb-1">Purity</p>
-                <p className="text-xl font-black text-white">99.9%</p>
-              </div>
-            </div>
+            )}
 
           </div>
 
